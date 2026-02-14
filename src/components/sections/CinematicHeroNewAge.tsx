@@ -92,15 +92,10 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         )}
                         aria-label={opt.title}
                       >
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg border bg-background/20">
-                            <img
-                              src="/placeholder.svg"
-                              alt={`${opt.title} placeholder`}
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                              decoding="async"
-                            />
+                        <div className="flex items-center gap-4">
+                          {/* Schematic visual block (part of the button) */}
+                          <div className="h-14 w-14 shrink-0 rounded-2xl border bg-background/10 grid place-items-center">
+                            <span className="text-sm font-semibold tracking-tight text-foreground/90">Görsel</span>
                           </div>
 
                           <div className="min-w-0">
