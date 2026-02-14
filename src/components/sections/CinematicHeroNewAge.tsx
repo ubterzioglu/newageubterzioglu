@@ -37,9 +37,10 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
               <div className="animate-fade-in">
                 <div className="h-5" aria-hidden="true" />
                 <h1 className="hero-title">
-                  Building software,
-                  <span className="hero-title-accent"> testing realities</span>,
-                  connecting communities.
+                  ubterzioglu.de
+                  <span className="hero-title-accent"> testing software</span>,
+                  building apps
+                  <span className="hero-title-accent"> connecting communities</span>.
                 </h1>
                 <p className="hero-subtitle">
                   Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu. Choose your path to proceed! Who are you?
