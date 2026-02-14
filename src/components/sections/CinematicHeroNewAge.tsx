@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function CinematicHeroNewAge({ className }: { className?: string }) {
   return (
-    <header className={cn("relative min-h-[92vh] overflow-hidden", className)}>
+    <header className={cn("relative h-[100svh] overflow-hidden", className)}>
       {/* Background image */}
       <div className="absolute inset-0">
         <img
@@ -32,7 +32,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       {/* Left content */}
       <div className="relative z-10">
         <div className="container">
-          <div className="grid min-h-[70vh] items-end pb-14 md:items-center md:pb-16">
+          <div className="grid h-[100svh] items-end pb-10 md:items-center md:pb-12">
             <div className="max-w-2xl">
               <div className="animate-fade-in">
                 <div className="h-5" aria-hidden="true" />
@@ -50,9 +50,9 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                   <span className="block">Choose your path to proceed! Who are you?</span>
                 </p>
 
-                <div className="mt-8 max-w-sm sm:max-w-md">
+                <div className="mt-6 max-w-xl sm:max-w-2xl">
                   <p className="mb-3 text-sm font-medium tracking-wide text-foreground/90">Pages</p>
-                  <div className="grid gap-3">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     {[
                       {
                         icon: "🦉",
@@ -83,14 +83,14 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                       <button
                         key={opt.title}
                         type="button"
-                        className={cn(
-                          "group text-left",
-                          "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
-                          "px-4 py-4",
-                          "transition-colors",
-                          "hover:bg-card/70",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                        )}
+                          className={cn(
+                            "group text-left",
+                            "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
+                            "px-4 py-3",
+                            "transition-colors",
+                            "hover:bg-card/70",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                          )}
                         aria-label={opt.title}
                       >
                         <div className="flex items-center justify-between gap-4">
