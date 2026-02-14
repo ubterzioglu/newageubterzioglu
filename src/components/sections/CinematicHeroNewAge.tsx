@@ -65,11 +65,6 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         desc: "Hiring view: CV, highlights, and quick fit.",
                       },
                       {
-                        icon: "🧭",
-                        title: "Explorer",
-                        desc: "Knowledge corner: links, articles, reviews, and notes.",
-                      },
-                      {
                         icon: "🤝",
                         title: "Colleague",
                         desc: "How I work, collaborate, and support.",
@@ -78,11 +73,6 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         icon: "🧪",
                         title: "QA Engineer",
                         desc: "My QA mindset, tools, and test approach.",
-                      },
-                      {
-                        icon: "👀",
-                        title: "Curious Visitor",
-                        desc: "Quick tour: what I do, in plain language.",
                       },
                       {
                         icon: "👽",
