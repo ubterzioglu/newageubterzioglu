@@ -47,6 +47,27 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+        /** ubterzioglu.de palette-driven semantic accents */
+        cta: {
+          DEFAULT: "hsl(var(--cta))",
+          foreground: "hsl(var(--cta-foreground))",
+        },
+        glow: {
+          DEFAULT: "hsl(var(--glow))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        energy: {
+          DEFAULT: "hsl(var(--energy))",
+          foreground: "hsl(var(--energy-foreground))",
+        },
+        depth: {
+          DEFAULT: "hsl(var(--depth))",
+        },
+
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -57,6 +78,18 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      boxShadow: {
+        "glow-primary": "var(--shadow-glow-primary)",
+        "glow-primary-strong": "var(--shadow-glow-primary-strong)",
+        "glow-cta": "var(--shadow-glow-cta)",
+        "glow-cta-strong": "var(--shadow-glow-cta-strong)",
+        "glass": "var(--shadow-glass)",
+      },
+      backgroundImage: {
+        hero: "var(--gradient-hero)",
+        aurora: "var(--gradient-aurora)",
+        "bottom-fade": "var(--gradient-bottom-fade)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +113,22 @@ export default {
             height: "0",
           },
         },
+        "city-flicker": {
+          "0%, 100%": { opacity: "0.10" },
+          "52%": { opacity: "0.18" },
+          "56%": { opacity: "0.06" },
+          "62%": { opacity: "0.16" },
+        },
+        "snow-fall": {
+          "0%": { transform: "translate3d(0,-12%,0)" },
+          "100%": { transform: "translate3d(-6%,12%,0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "city-flicker": "city-flicker 5.5s ease-in-out infinite",
+        "snow-fall": "snow-fall var(--snow-duration, 12s) linear infinite",
       },
     },
   },
