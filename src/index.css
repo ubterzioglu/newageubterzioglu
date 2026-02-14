@@ -176,6 +176,15 @@ All colors MUST be HSL.
 
 @layer utilities {
   /* Snowfall layers */
+  @keyframes snow-fall {
+    0% {
+      transform: translate3d(0, -12%, 0);
+    }
+    100% {
+      transform: translate3d(-6%, 12%, 0);
+    }
+  }
+
   .snow-layer {
     --snow-duration: 13s;
     opacity: 0.55;
