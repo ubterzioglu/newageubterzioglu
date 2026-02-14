@@ -2,7 +2,6 @@ import * as React from "react";
 
 import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
 import { cn } from "@/lib/utils";
@@ -36,63 +35,85 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
           <div className="grid min-h-[70vh] items-end pb-14 md:items-center md:pb-16">
             <div className="max-w-2xl">
               <div className="animate-fade-in">
-                <p className="kicker">Observer of the future</p>
+                <div className="h-5" aria-hidden="true" />
                 <h1 className="hero-title">
                   Building software,
                   <span className="hero-title-accent"> testing realities</span>,
                   connecting communities.
                 </h1>
                 <p className="hero-subtitle">
-                  A personal space for software craftsmanship, quality mindset, community building, and the
-                  Germany–Turkey bridge—calm, technical, and future-focused.
+                  Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu. Choose your path to proceed! Who are you?
                 </p>
 
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Button
-                    variant="hero"
-                    size="lg"
-                    className="h-12 min-w-[220px] rounded-full text-base md:text-lg"
-                  >
-                    Explore work
-                  </Button>
-                  <Button
-                    variant="hero"
-                    size="lg"
-                    className="h-12 min-w-[220px] rounded-full text-base md:text-lg"
-                  >
-                    Read the manifesto
-                  </Button>
-                </div>
-
-                <div className="mt-10 max-w-xl">
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    <Card className="card-glass aspect-square w-full border-primary/20 bg-card/25">
-                      <div className="flex h-full flex-col justify-center p-4">
-                        <p className="card-label">Focus</p>
-                        <p className="card-value">Software</p>
-                      </div>
-                    </Card>
-
-                    <Card className="card-glass aspect-square w-full border-success/20 bg-card/25">
-                      <div className="flex h-full flex-col justify-center p-4">
-                        <p className="card-label">Quality</p>
-                        <p className="card-value">Testing</p>
-                      </div>
-                    </Card>
-
-                    <Card className="card-glass aspect-square w-full border-energy/20 bg-card/25">
-                      <div className="flex h-full flex-col justify-center p-4">
-                        <p className="card-label">Mode</p>
-                        <p className="card-value">Builder</p>
-                      </div>
-                    </Card>
-
-                    <Card className="card-glass aspect-square w-full border-cta/20 bg-card/25">
-                      <div className="flex h-full flex-col justify-center p-4">
-                        <p className="card-label">Bridge</p>
-                        <p className="card-value">DE–TR</p>
-                      </div>
-                    </Card>
+                <div className="mt-8 max-w-xl">
+                  <p className="mb-3 text-sm font-medium tracking-wide text-foreground/90">Pages</p>
+                  <div className="grid gap-3">
+                    {[
+                      {
+                        icon: "🦉",
+                        title: "I don't know!",
+                        desc: "Let me show you around.",
+                      },
+                      {
+                        icon: "🧑‍💼",
+                        title: "Recruiter",
+                        desc: "Hiring view: CV, highlights, and quick fit.",
+                      },
+                      {
+                        icon: "🧭",
+                        title: "Explorer",
+                        desc: "Knowledge corner: links, articles, reviews, and notes.",
+                      },
+                      {
+                        icon: "🤝",
+                        title: "Colleague",
+                        desc: "How I work, collaborate, and support.",
+                      },
+                      {
+                        icon: "🧪",
+                        title: "QA Engineer",
+                        desc: "My QA mindset, tools, and test approach.",
+                      },
+                      {
+                        icon: "👀",
+                        title: "Curious Visitor",
+                        desc: "Quick tour: what I do, in plain language.",
+                      },
+                      {
+                        icon: "👽",
+                        title: "Alien",
+                        desc: "Fun mode: welcome, Earth visitor.",
+                      },
+                    ].map((opt) => (
+                      <button
+                        key={opt.title}
+                        type="button"
+                        className={cn(
+                          "group text-left",
+                          "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
+                          "px-4 py-4",
+                          "transition-colors",
+                          "hover:bg-card/70",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        )}
+                        aria-label={opt.title}
+                      >
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-start gap-3">
+                            <div className="mt-0.5 grid h-9 w-9 place-items-center rounded-xl border bg-background/20 text-base">
+                              <span aria-hidden="true">{opt.icon}</span>
+                            </div>
+                            <div>
+                              <p className="text-base font-semibold tracking-tight text-foreground">{opt.title}</p>
+                              <p className="mt-1 text-sm leading-snug text-foreground/80">{opt.desc}</p>
+                            </div>
+                          </div>
+                          <span className="text-foreground/50 transition-colors group-hover:text-foreground/80" aria-hidden="true">
+                            ›
+                          </span>
+                        </div>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
