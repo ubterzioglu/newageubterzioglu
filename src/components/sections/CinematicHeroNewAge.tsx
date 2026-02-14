@@ -36,14 +36,15 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
             <div className="max-w-2xl">
               <div className="animate-fade-in">
                 <div className="h-5" aria-hidden="true" />
-                <h1 className="hero-title">
-                  ubterzioglu.de
-                  <span className="hero-title-accent"> testing software</span>,
-                  building apps
-                  <span className="hero-title-accent"> connecting communities</span>.
+                <h1 className="hero-title text-3xl leading-[1.05] md:text-5xl">
+                  <span className="block">ubterzioglu.de</span>
+                  <span className="hero-title-accent block">testing software,</span>
+                  <span className="block">building apps</span>
+                  <span className="hero-title-accent block">connecting communities.</span>
                 </h1>
                 <p className="hero-subtitle">
-                  Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu. Choose your path to proceed! Who are you?
+                  <span className="block">Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu.</span>
+                  <span className="block">Choose your path to proceed! Who are you?</span>
                 </p>
 
                 <div className="mt-8 max-w-sm sm:max-w-md">
