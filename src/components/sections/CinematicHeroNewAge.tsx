@@ -63,7 +63,8 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                       <span className="hero-title-accent">connecting communities.</span>
                     </h1>
                     <p className="hero-subtitle">
-                      <span className="block">Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu.</span>
+                      <span className="block">Welcome to my page stranger!</span>
+                      <span className="block">I&apos;m Umut Barış Terzioğlu.</span>
                       <span className="block">Choose your path to proceed! Who are you?</span>
                     </p>
 
