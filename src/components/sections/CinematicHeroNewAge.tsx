@@ -50,9 +50,8 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                   <span className="block">Choose your path to proceed! Who are you?</span>
                 </p>
 
-                <div className="mt-6 max-w-xl sm:max-w-2xl">
-                  <p className="mb-3 text-sm font-medium tracking-wide text-foreground/90">Pages</p>
-                  <div className="grid gap-3 sm:grid-cols-2">
+                <div className="mt-4 max-w-lg sm:max-w-xl">
+                  <div className="grid gap-2 sm:grid-cols-2">
                     {[
                       {
                         title: "Curious visitor",
@@ -84,27 +83,28 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         type="button"
                         className={cn(
                           "group text-left",
+                          "h-[72px] overflow-hidden",
                           "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
-                          "px-4 py-3",
+                          "px-3 py-2",
                           "transition-colors",
                           "hover:bg-card/70",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         )}
                         aria-label={opt.title}
                       >
-                        <div className="flex items-center gap-4">
-                          {/* Schematic visual block (part of the button) */}
-                          <div className="h-14 w-14 shrink-0 rounded-2xl border bg-background/10 grid place-items-center">
+                        <div className="flex h-full items-stretch gap-3">
+                          {/* Schematic visual block (part of the button, full height) */}
+                          <div className="h-full w-[72px] shrink-0 rounded-xl border bg-background/10 grid place-items-center">
                             <span className="text-sm font-semibold tracking-tight text-foreground/90">Görsel</span>
                           </div>
 
-                          <div className="min-w-0">
-                            <p className="text-base font-semibold tracking-tight text-foreground">{opt.title}</p>
-                            <p className="mt-1 text-sm leading-snug text-foreground/80">{opt.desc}</p>
+                          <div className="min-w-0 self-center">
+                            <p className="text-sm font-semibold tracking-tight text-foreground">{opt.title}</p>
+                            <p className="mt-0.5 text-xs leading-snug text-foreground/80 line-clamp-2">{opt.desc}</p>
                           </div>
 
                           <span
-                            className="ml-auto text-foreground/50 transition-colors group-hover:text-foreground/80"
+                            className="ml-auto self-center text-foreground/50 transition-colors group-hover:text-foreground/80"
                             aria-hidden="true"
                           >
                             ›
