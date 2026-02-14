@@ -125,7 +125,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
 
                               <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
                                 <div className="min-w-0">
-                                  <p className="text-sm font-semibold tracking-tight text-foreground">{opt.title}</p>
+                                  <p className="text-[15px] font-semibold leading-tight tracking-tight text-foreground sm:text-base">{opt.title}</p>
                                 </div>
 
                                 <span
