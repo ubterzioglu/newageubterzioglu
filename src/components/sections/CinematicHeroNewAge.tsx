@@ -85,30 +85,32 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                           "group text-left",
                           "h-[72px] overflow-hidden",
                           "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
-                          "px-3 py-2",
+                          "p-0",
                           "transition-colors",
                           "hover:bg-card/70",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         )}
                         aria-label={opt.title}
                       >
-                        <div className="flex h-full items-stretch gap-3">
-                          {/* Schematic visual block (part of the button, full height) */}
-                          <div className="h-full w-[72px] shrink-0 rounded-xl border bg-background/10 grid place-items-center">
+                        <div className="flex h-full items-stretch">
+                          {/* Schematic visual block (flush, full height, part of the button) */}
+                          <div className="h-full w-[76px] shrink-0 rounded-l-2xl bg-background/10 grid place-items-center">
                             <span className="text-sm font-semibold tracking-tight text-foreground/90">Görsel</span>
                           </div>
 
-                          <div className="min-w-0 self-center">
-                            <p className="text-sm font-semibold tracking-tight text-foreground">{opt.title}</p>
-                            <p className="mt-0.5 text-xs leading-snug text-foreground/80 line-clamp-2">{opt.desc}</p>
-                          </div>
+                          <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
+                            <div className="min-w-0">
+                              <p className="text-sm font-semibold tracking-tight text-foreground">{opt.title}</p>
+                              <p className="mt-0.5 text-xs leading-snug text-foreground/80 line-clamp-2">{opt.desc}</p>
+                            </div>
 
-                          <span
-                            className="ml-auto self-center text-foreground/50 transition-colors group-hover:text-foreground/80"
-                            aria-hidden="true"
-                          >
-                            ›
-                          </span>
+                            <span
+                              className="ml-auto text-foreground/50 transition-colors group-hover:text-foreground/80"
+                              aria-hidden="true"
+                            >
+                              ›
+                            </span>
+                          </div>
                         </div>
                       </button>
                     ))}
