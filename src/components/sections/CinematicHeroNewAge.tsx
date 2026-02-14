@@ -46,7 +46,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                   Welcome to my page stranger! I&apos;m Umut Barış Terzioğlu. Choose your path to proceed! Who are you?
                 </p>
 
-                <div className="mt-8 max-w-xl">
+                <div className="mt-8 max-w-sm sm:max-w-md">
                   <p className="mb-3 text-sm font-medium tracking-wide text-foreground/90">Pages</p>
                   <div className="grid gap-3">
                     {[
