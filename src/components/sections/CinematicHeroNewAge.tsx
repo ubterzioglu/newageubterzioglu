@@ -55,27 +55,26 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                   <div className="grid gap-3 sm:grid-cols-2">
                     {[
                       {
-                        icon: "🦉",
+                        title: "Curious visitor",
+                        desc: "Quick tour and context.",
+                      },
+                      {
                         title: "I don't know!",
                         desc: "Let me show you around.",
                       },
                       {
-                        icon: "🧑‍💼",
                         title: "Recruiter",
                         desc: "Hiring view: CV, highlights, and quick fit.",
                       },
                       {
-                        icon: "🤝",
                         title: "Colleague",
                         desc: "How I work, collaborate, and support.",
                       },
                       {
-                        icon: "🧪",
                         title: "QA Engineer",
                         desc: "My QA mindset, tools, and test approach.",
                       },
                       {
-                        icon: "👽",
                         title: "Alien",
                         desc: "Fun mode: welcome, Earth visitor.",
                       },
@@ -83,27 +82,36 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                       <button
                         key={opt.title}
                         type="button"
-                          className={cn(
-                            "group text-left",
-                            "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
-                            "px-4 py-3",
-                            "transition-colors",
-                            "hover:bg-card/70",
-                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                          )}
+                        className={cn(
+                          "group text-left",
+                          "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
+                          "px-4 py-3",
+                          "transition-colors",
+                          "hover:bg-card/70",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        )}
                         aria-label={opt.title}
                       >
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex items-start gap-3">
-                            <div className="mt-0.5 grid h-9 w-9 place-items-center rounded-xl border bg-background/20 text-base">
-                              <span aria-hidden="true">{opt.icon}</span>
-                            </div>
-                            <div>
-                              <p className="text-base font-semibold tracking-tight text-foreground">{opt.title}</p>
-                              <p className="mt-1 text-sm leading-snug text-foreground/80">{opt.desc}</p>
-                            </div>
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg border bg-background/20">
+                            <img
+                              src="/placeholder.svg"
+                              alt={`${opt.title} placeholder`}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                              decoding="async"
+                            />
                           </div>
-                          <span className="text-foreground/50 transition-colors group-hover:text-foreground/80" aria-hidden="true">
+
+                          <div className="min-w-0">
+                            <p className="text-base font-semibold tracking-tight text-foreground">{opt.title}</p>
+                            <p className="mt-1 text-sm leading-snug text-foreground/80">{opt.desc}</p>
+                          </div>
+
+                          <span
+                            className="ml-auto text-foreground/50 transition-colors group-hover:text-foreground/80"
+                            aria-hidden="true"
+                          >
                             ›
                           </span>
                         </div>
