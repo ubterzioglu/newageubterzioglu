@@ -1,24 +1,12 @@
 import * as React from "react";
 
 import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
 import { cn } from "@/lib/utils";
 
-type NavItem = {
-  label: string;
-  href: string;
-};
-
-const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  // Keep IA stable: add existing links here without changing routes.
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
-  { label: "Community", href: "/community" },
-  { label: "Contact", href: "/contact" },
-];
 
 export function CinematicHeroNewAge({ className }: { className?: string }) {
   return (
@@ -41,36 +29,6 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       <div className="absolute inset-0 city-flicker" aria-hidden="true" />
       <SnowfallOverlay className="opacity-100" layers={3} />
 
-      {/* Navigation */}
-      <div className="relative z-10">
-        <div className="container">
-          <div className="pt-8">
-            <nav className="nav-glass">
-              <a href="/" className="brand-mark" aria-label="ubterzioglu.de home">
-                <span className="brand-dot" aria-hidden="true" />
-                <span className="brand-text">ubterzioglu.de</span>
-              </a>
-
-              <div className="hidden items-center gap-6 md:flex">
-                {navItems.map((item) => (
-                  <a key={item.href} href={item.href} className="nav-link">
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" className="hidden md:inline-flex">
-                  Newsletter
-                </Button>
-                <Button variant="cta" size="sm">
-                  Let’s build
-                </Button>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
 
       {/* Left content */}
       <div className="relative z-10">
@@ -90,33 +48,52 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                 </p>
 
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Button variant="hero" size="lg">
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="h-12 min-w-[220px] rounded-full text-base md:text-lg"
+                  >
                     Explore work
                   </Button>
-                  <Button variant="outline" size="lg">
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="h-12 min-w-[220px] rounded-full text-base md:text-lg"
+                  >
                     Read the manifesto
                   </Button>
                 </div>
 
-                <div className="mt-10 grid gap-4 md:grid-cols-3">
-                  <Card className="card-glass">
-                    <div className="p-5">
-                      <p className="card-label">Focus</p>
-                      <p className="card-value">Software & Testing</p>
-                    </div>
-                  </Card>
-                  <Card className="card-glass card-glass--violet">
-                    <div className="p-5">
-                      <p className="card-label">Mode</p>
-                      <p className="card-value">Independent Builder</p>
-                    </div>
-                  </Card>
-                  <Card className="card-glass card-glass--amber">
-                    <div className="p-5">
-                      <p className="card-label">Signal</p>
-                      <p className="card-value">Community Energy</p>
-                    </div>
-                  </Card>
+                <div className="mt-10 max-w-xl">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    <Card className="card-glass aspect-square w-full border-primary/20 bg-card/25">
+                      <div className="flex h-full flex-col justify-center p-4">
+                        <p className="card-label">Focus</p>
+                        <p className="card-value">Software</p>
+                      </div>
+                    </Card>
+
+                    <Card className="card-glass aspect-square w-full border-success/20 bg-card/25">
+                      <div className="flex h-full flex-col justify-center p-4">
+                        <p className="card-label">Quality</p>
+                        <p className="card-value">Testing</p>
+                      </div>
+                    </Card>
+
+                    <Card className="card-glass aspect-square w-full border-energy/20 bg-card/25">
+                      <div className="flex h-full flex-col justify-center p-4">
+                        <p className="card-label">Mode</p>
+                        <p className="card-value">Builder</p>
+                      </div>
+                    </Card>
+
+                    <Card className="card-glass aspect-square w-full border-cta/20 bg-card/25">
+                      <div className="flex h-full flex-col justify-center p-4">
+                        <p className="card-label">Bridge</p>
+                        <p className="card-value">DE–TR</p>
+                      </div>
+                    </Card>
+                  </div>
                 </div>
               </div>
             </div>
