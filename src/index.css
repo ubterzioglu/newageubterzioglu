@@ -8,89 +8,73 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark-first cinematic system (palette locked) */
+    --background: 0 0% 0%; /* #000000 */
+    --foreground: 240 100% 99%; /* #FAFAFF */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 33% 6%;
+    --card-foreground: 240 100% 99%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 33% 6%;
+    --popover-foreground: 240 100% 99%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 200 99% 47%; /* #01A1F1 */
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 16% 12%;
+    --secondary-foreground: 240 100% 99%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 16% 12%;
+    --muted-foreground: 240 8% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 240 16% 12%;
+    --accent-foreground: 240 100% 99%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 16 92% 52%; /* #F65314 */
+    --destructive-foreground: 240 100% 99%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 14% 18%;
+    --input: 240 14% 18%;
+    --ring: 200 99% 47%;
 
-    --radius: 0.5rem;
+    --radius: 0.9rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Additional palette semantics */
+    --glow: 289 96% 37%; /* #8F03B7 */
+    --cta: 44 100% 50%; /* #FFBB00 */
+    --cta-foreground: 0 0% 0%;
+    --success: 81 100% 37%; /* #7CBB00 */
+    --success-foreground: 0 0% 0%;
+    --energy: 16 92% 52%; /* #F65314 */
+    --energy-foreground: 240 100% 99%;
+    --depth: 0 63% 45%; /* #B82D2D */
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Gradients & effects */
+    --gradient-hero: radial-gradient(1200px 600px at 20% 25%, hsl(var(--primary) / 0.22), transparent 55%),
+      radial-gradient(900px 520px at 38% 58%, hsl(var(--glow) / 0.20), transparent 60%),
+      linear-gradient(90deg, hsl(var(--background) / 0.92) 0%, hsl(var(--background) / 0.55) 55%,
+        hsl(var(--background) / 0.20) 100%);
 
-    --sidebar-primary: 240 5.9% 10%;
+    --gradient-aurora: radial-gradient(900px 520px at 72% 30%, hsl(var(--glow) / 0.18), transparent 60%),
+      radial-gradient(900px 520px at 66% 62%, hsl(var(--primary) / 0.12), transparent 62%);
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --gradient-bottom-fade: linear-gradient(to bottom, transparent, hsl(var(--background) / 0.92));
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --shadow-glow-primary: 0 0 0 1px hsl(var(--primary) / 0.20), 0 12px 35px -18px hsl(var(--primary) / 0.80);
+    --shadow-glow-primary-strong: 0 0 0 1px hsl(var(--primary) / 0.35), 0 18px 55px -22px hsl(var(--primary) / 0.95);
+    --shadow-glow-cta: 0 0 0 1px hsl(var(--cta) / 0.18), 0 14px 42px -18px hsl(var(--cta) / 0.70);
+    --shadow-glow-cta-strong: 0 0 0 1px hsl(var(--cta) / 0.28), 0 20px 60px -22px hsl(var(--cta) / 0.92);
+    --shadow-glass: 0 10px 40px -22px hsl(var(--background) / 0.65);
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar tokens (kept, mapped to dark-first) */
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 240 100% 99%;
+    --sidebar-primary: 200 99% 47%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 240 16% 12%;
+    --sidebar-accent-foreground: 240 100% 99%;
+    --sidebar-border: 240 14% 18%;
+    --sidebar-ring: 200 99% 47%;
   }
 }
 
@@ -103,3 +87,135 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* Hero / brand */
+  .kicker {
+    @apply text-sm tracking-[0.22em] uppercase text-muted-foreground;
+  }
+
+  .hero-title {
+    @apply mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.02em] md:text-6xl;
+  }
+
+  .hero-title-accent {
+    @apply text-foreground;
+    text-shadow: 0 0 18px hsl(var(--primary) / 0.22);
+  }
+
+  .hero-subtitle {
+    @apply mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg;
+  }
+
+  /* Nav */
+  .nav-glass {
+    @apply flex items-center justify-between rounded-2xl border bg-background/25 px-4 py-3 backdrop-blur-xl md:px-6;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .brand-mark {
+    @apply inline-flex items-center gap-3 rounded-xl px-2 py-1 transition-transform duration-200 hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+  }
+
+  .brand-dot {
+    @apply h-2.5 w-2.5 rounded-full;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.18), 0 0 22px hsl(var(--glow) / 0.35);
+  }
+
+  .brand-text {
+    @apply text-sm font-medium tracking-wide;
+  }
+
+  .nav-link {
+    @apply text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+  }
+
+  /* Cards */
+  .card-glass {
+    @apply rounded-2xl border bg-card/35 text-card-foreground backdrop-blur-xl;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .card-glass--violet {
+    box-shadow: var(--shadow-glass), 0 0 0 1px hsl(var(--glow) / 0.16);
+  }
+
+  .card-glass--amber {
+    box-shadow: var(--shadow-glass), 0 0 0 1px hsl(var(--cta) / 0.14);
+  }
+
+  .card-label {
+    @apply text-xs tracking-[0.18em] uppercase text-muted-foreground;
+  }
+
+  .card-value {
+    @apply mt-2 text-sm font-medium;
+  }
+
+  /* Background overlays used by hero */
+  .bg-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-aurora {
+    background-image: var(--gradient-aurora);
+  }
+
+  .bg-bottom-fade {
+    background-image: var(--gradient-bottom-fade);
+  }
+
+  .city-flicker {
+    @apply animate-city-flicker;
+    background: radial-gradient(900px 520px at 72% 35%, hsl(var(--primary) / 0.08), transparent 65%),
+      radial-gradient(900px 520px at 82% 45%, hsl(var(--glow) / 0.06), transparent 70%);
+    mix-blend-mode: screen;
+  }
+}
+
+@layer utilities {
+  /* Snowfall layers */
+  .snow-layer {
+    --snow-duration: 13s;
+    opacity: 0.55;
+    filter: blur(0.2px);
+    background-image:
+      radial-gradient(2px 2px at 10% 20%, hsl(var(--foreground) / 0.42) 50%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 30% 70%, hsl(var(--foreground) / 0.34) 50%, transparent 60%),
+      radial-gradient(1px 1px at 55% 35%, hsl(var(--foreground) / 0.28) 50%, transparent 60%),
+      radial-gradient(2.5px 2.5px at 75% 60%, hsl(var(--foreground) / 0.38) 50%, transparent 60%),
+      radial-gradient(1px 1px at 90% 15%, hsl(var(--foreground) / 0.22) 50%, transparent 60%);
+    background-size: 420px 420px;
+    animation: snow-fall var(--snow-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .snow-layer--near {
+    --snow-duration: 11s;
+    opacity: 0.65;
+    background-size: 360px 360px;
+  }
+
+  .snow-layer--mid {
+    --snow-duration: 14s;
+    opacity: 0.5;
+    background-size: 520px 520px;
+  }
+
+  .snow-layer--far {
+    --snow-duration: 18s;
+    opacity: 0.35;
+    background-size: 680px 680px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .snow-layer {
+      animation: none;
+    }
+    .city-flicker {
+      animation: none;
+    }
+  }
+}
+
