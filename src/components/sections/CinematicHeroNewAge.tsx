@@ -15,7 +15,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
         <img
           src={heroImage}
           alt="A cinematic night scene with a trench coat silhouette looking at a futuristic city in the distance"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-[72%_100%]"
           loading="eager"
           decoding="async"
         />
