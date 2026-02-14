@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import heroImage from "@/assets/hero-ubterzioglu-cinematic.jpg";
+import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
@@ -39,7 +39,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       {/* Ambient overlays */}
       <div className="absolute inset-0 bg-aurora" aria-hidden="true" />
       <div className="absolute inset-0 city-flicker" aria-hidden="true" />
-      <SnowfallOverlay className="opacity-90" layers={2} />
+      <SnowfallOverlay className="opacity-100" layers={3} />
 
       {/* Navigation */}
       <div className="relative z-10">
