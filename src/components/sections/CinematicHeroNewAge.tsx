@@ -2,7 +2,13 @@ import * as React from "react";
 
 import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
 
-import { Card } from "@/components/ui/card";
+import thumbCuriousVisitor from "@/assets/thumb-curious-visitor.jpg";
+import thumbIDontKnow from "@/assets/thumb-i-dont-know.jpg";
+import thumbRecruiter from "@/assets/thumb-recruiter.jpg";
+import thumbColleague from "@/assets/thumb-colleague.jpg";
+import thumbQa from "@/assets/thumb-qa.jpg";
+import thumbAlien from "@/assets/thumb-alien.jpg";
+
 import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
 import { cn } from "@/lib/utils";
 
@@ -56,26 +62,32 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                       {
                         title: "Curious visitor",
                         desc: "Quick tour and context.",
+                        image: thumbCuriousVisitor,
                       },
                       {
                         title: "I don't know!",
                         desc: "Let me show you around.",
+                        image: thumbIDontKnow,
                       },
                       {
                         title: "Recruiter",
                         desc: "Hiring view: CV, highlights, and quick fit.",
+                        image: thumbRecruiter,
                       },
                       {
                         title: "Colleague",
                         desc: "How I work, collaborate, and support.",
+                        image: thumbColleague,
                       },
                       {
                         title: "QA Engineer",
                         desc: "My QA mindset, tools, and test approach.",
+                        image: thumbQa,
                       },
                       {
                         title: "Alien",
                         desc: "Fun mode: welcome, Earth visitor.",
+                        image: thumbAlien,
                       },
                     ].map((opt) => (
                       <button
@@ -93,9 +105,17 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         aria-label={opt.title}
                       >
                         <div className="flex h-full items-stretch">
+                        
                           {/* Schematic visual block (flush, full height, part of the button) */}
-                          <div className="h-full w-[76px] shrink-0 rounded-l-2xl bg-background/10 grid place-items-center">
-                            <span className="text-sm font-semibold tracking-tight text-foreground/90">Görsel</span>
+                          
+                          <div className="h-full w-[76px] shrink-0 rounded-l-2xl bg-background/10">
+                            <img
+                              src={opt.image}
+                              alt={`${opt.title} thumbnail`}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                              decoding="async"
+                            />
                           </div>
 
                           <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
