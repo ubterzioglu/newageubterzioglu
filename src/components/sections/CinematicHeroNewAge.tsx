@@ -2,12 +2,12 @@ import * as React from "react";
 
 import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
 
-import thumbCuriousVisitor from "@/assets/thumb-curious-visitor.jpg";
-import thumbIDontKnow from "@/assets/thumb-i-dont-know.jpg";
-import thumbRecruiter from "@/assets/thumb-recruiter.jpg";
-import thumbColleague from "@/assets/thumb-colleague.jpg";
-import thumbQa from "@/assets/thumb-qa.jpg";
-import thumbAlien from "@/assets/thumb-alien.jpg";
+import thumbCuriousVisitor from "@/assets/thumb-curious-visitor-v2.jpg";
+import thumbIDontKnow from "@/assets/thumb-i-dont-know-v2.jpg";
+import thumbRecruiter from "@/assets/thumb-recruiter-v2.jpg";
+import thumbColleague from "@/assets/thumb-colleague-v2.jpg";
+import thumbQa from "@/assets/thumb-qa-v2.jpg";
+import thumbAlien from "@/assets/thumb-alien-v2.jpg";
 
 import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
 import { cn } from "@/lib/utils";
@@ -73,33 +73,27 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                         {[
                           {
                             title: "Curious visitor",
-                            desc: "Quick tour and context.",
                             image: thumbCuriousVisitor,
                             onClick: () => setPanel("curious"),
                           },
                           {
                             title: "I don't know!",
-                            desc: "Let me show you around.",
                             image: thumbIDontKnow,
                           },
                           {
                             title: "Recruiter",
-                            desc: "Hiring view: CV, highlights, and quick fit.",
                             image: thumbRecruiter,
                           },
                           {
                             title: "Colleague",
-                            desc: "How I work, collaborate, and support.",
                             image: thumbColleague,
                           },
                           {
                             title: "QA Engineer",
-                            desc: "My QA mindset, tools, and test approach.",
                             image: thumbQa,
                           },
                           {
                             title: "Alien",
-                            desc: "Fun mode: welcome, Earth visitor.",
                             image: thumbAlien,
                           },
                         ].map((opt) => (
@@ -109,7 +103,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                             onClick={opt.onClick}
                             className={cn(
                               "group text-left",
-                              "h-[72px] overflow-hidden",
+                              "h-[60px] overflow-hidden",
                               "rounded-2xl border bg-card/55 backdrop-blur-xl shadow-glass",
                               "p-0",
                               "transition-colors",
@@ -119,7 +113,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                             aria-label={opt.title}
                           >
                             <div className="flex h-full items-stretch">
-                              <div className="h-full w-[76px] shrink-0 rounded-l-2xl bg-background/10">
+                              <div className="h-full w-[64px] shrink-0 rounded-l-2xl bg-background/10">
                                 <img
                                   src={opt.image}
                                   alt={`${opt.title} thumbnail`}
@@ -132,9 +126,6 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                               <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
                                 <div className="min-w-0">
                                   <p className="text-sm font-semibold tracking-tight text-foreground">{opt.title}</p>
-                                  <p className="mt-0.5 text-xs leading-snug text-foreground/80 line-clamp-2">
-                                    {opt.desc}
-                                  </p>
                                 </div>
 
                                 <span
