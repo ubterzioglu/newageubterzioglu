@@ -82,7 +82,7 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
       {/* Ambient overlays */}
       <div className="absolute inset-0 bg-aurora" aria-hidden="true" />
-      <CodeRainOverlay className="opacity-70" layers={2} columns={22} />
+      <CodeRainOverlay className="z-[2] opacity-95" layers={3} columns={28} />
 
       {/* Left content */}
       <div className="relative z-10">
