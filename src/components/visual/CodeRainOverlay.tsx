@@ -50,72 +50,85 @@ function makeColumnString(seed: number) {
   return parts.join("\n");
 }
 
-export function CodeRainOverlay({ className, layers = 2, columns = 26 }: CodeRainOverlayProps) {
-  const reducedMotion = usePrefersReducedMotion();
+export const CodeRainOverlay = React.forwardRef<HTMLDivElement, CodeRainOverlayProps>(
+  ({ className, layers = 2, columns = 26 }, ref) => {
+    const reducedMotion = usePrefersReducedMotion();
 
-  const layerConfigs = React.useMemo(() => {
-    const base = [
-      { opacity: 0.55, blur: 0.1, size: 12, duration: 8 },
-      { opacity: 0.38, blur: 0.35, size: 11, duration: 11 },
-      { opacity: 0.24, blur: 0.6, size: 10, duration: 15 },
-    ] as const;
+    const layerConfigs = React.useMemo(() => {
+      const base = [
+        { opacity: 0.65, blur: 0.05, size: 12, duration: 8 },
+        { opacity: 0.45, blur: 0.25, size: 11, duration: 11 },
+        { opacity: 0.30, blur: 0.45, size: 10, duration: 15 },
+      ] as const;
 
-    return base.slice(0, layers);
-  }, [layers]);
+      return base.slice(0, layers);
+    }, [layers]);
 
-  const cols = React.useMemo(() => Array.from({ length: columns }).map((_, i) => i), [columns]);
+    const cols = React.useMemo(() => Array.from({ length: columns }).map((_, i) => i), [columns]);
 
-  return (
-    <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
-      {layerConfigs.map((layer, layerIdx) => (
-        <div key={layerIdx} className="absolute inset-0">
-          {cols.map((i) => {
-            const left = ((i + layerIdx * 3) / columns) * 100;
-            const delay = -((i * 0.65 + layerIdx * 1.4) % layer.duration);
-            const duration = layer.duration + ((i + layerIdx) % 4);
-            const xJitter = (((i * 97 + layerIdx * 31) % 9) - 4) * 0.12;
-
-            return (
-              <div
-                // eslint-disable-next-line react/no-array-index-key
-                key={i}
-                className={cn(
-                  "code-rain-column absolute whitespace-pre select-none",
-                  reducedMotion ? "top-0" : "-top-[120%]",
-                  "font-mono tracking-[-0.02em]",
-                  "text-primary/90",
-                )}
-                style={{
-                  left: `${left + xJitter}%`,
-                  fontSize: `${layer.size}px`,
-                  lineHeight: 1.05,
-                  opacity: layer.opacity,
-                  filter: `blur(${layer.blur}px) drop-shadow(0 0 14px hsl(var(--primary) / 0.22))`,
-                  ...(reducedMotion
-                    ? {
-                        transform: "translate3d(0, 0, 0)",
-                      }
-                    : {
-                        // CSS custom property
-                        "--rain-duration": `${duration}s`,
-                      }),
-                }}
-              >
-                {makeColumnString(i + layerIdx * 17)}
-              </div>
-            );
-          })}
-        </div>
-      ))}
-
-      {/* subtle vignette to keep legibility */}
+    return (
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(900px 600px at 70% 55%, transparent 35%, hsl(var(--background) / 0.55) 78%), linear-gradient(90deg, hsl(var(--background) / 0.92) 0%, transparent 70%)",
-        }}
-      />
-    </div>
-  );
-}
+        ref={ref}
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute inset-0 overflow-hidden",
+          "mix-blend-screen",
+          className,
+        )}
+      >
+        {layerConfigs.map((layer, layerIdx) => (
+          <div key={layerIdx} className="absolute inset-0">
+            {cols.map((i) => {
+              const left = ((i + layerIdx * 3) / columns) * 100;
+              const delay = -((i * 0.65 + layerIdx * 1.4) % layer.duration);
+              const duration = layer.duration + ((i + layerIdx) % 4);
+              const xJitter = (((i * 97 + layerIdx * 31) % 9) - 4) * 0.12;
+
+              return (
+                <div
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={i}
+                  className={cn(
+                    "code-rain-column absolute whitespace-pre select-none",
+                    reducedMotion ? "top-0" : "-top-[120%]",
+                    "font-mono tracking-[-0.02em]",
+                    "text-primary",
+                  )}
+                  style={{
+                    left: `${left + xJitter}%`,
+                    fontSize: `${layer.size}px`,
+                    lineHeight: 1.05,
+                    opacity: layer.opacity,
+                    filter: `blur(${layer.blur}px) drop-shadow(0 0 16px hsl(var(--primary) / 0.38))`,
+                    ...(reducedMotion
+                      ? {
+                          transform: "translate3d(0, 0, 0)",
+                        }
+                      : {
+                          animationDelay: `${delay}s`,
+                          // CSS custom property
+                          "--rain-duration": `${duration}s`,
+                        }),
+                  }}
+                >
+                  {makeColumnString(i + layerIdx * 17)}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+
+        {/* subtle vignette to keep legibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(900px 600px at 70% 55%, transparent 35%, hsl(var(--background) / 0.55) 78%), linear-gradient(90deg, hsl(var(--background) / 0.92) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+    );
+  },
+);
+CodeRainOverlay.displayName = "CodeRainOverlay";
+

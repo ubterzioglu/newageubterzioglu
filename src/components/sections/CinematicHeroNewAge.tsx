@@ -13,7 +13,8 @@ import { CodeRainOverlay } from "@/components/visual/CodeRainOverlay";
 import { cn } from "@/lib/utils";
 
 
-export function CinematicHeroNewAge({ className }: { className?: string }) {
+export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: string }>(
+  ({ className }, ref) => {
   const PANELS = [
     "home",
     "curious",
@@ -65,7 +66,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
   ];
 
   return (
-    <header className={cn("relative h-[100svh] overflow-hidden", className)}>
+    <header ref={ref} className={cn("relative h-[100svh] overflow-hidden", className)}>
       {/* Background image */}
       <div className="absolute inset-0">
         <img
@@ -235,4 +236,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-bottom-fade" aria-hidden="true" />
     </header>
   );
-}
+},
+);
+CinematicHeroNewAge.displayName = "CinematicHeroNewAge";
+
