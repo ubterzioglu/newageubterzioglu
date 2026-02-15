@@ -233,7 +233,6 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
                     {p.key === "recruiter" ? <RecruiterCards /> : null}
                   </div>
-                  </div>
                 </div>
               </div>
             </section>
