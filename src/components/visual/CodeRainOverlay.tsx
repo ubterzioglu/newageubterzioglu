@@ -132,3 +132,5 @@ export const CodeRainOverlay = React.forwardRef<HTMLDivElement, CodeRainOverlayP
 );
 CodeRainOverlay.displayName = "CodeRainOverlay";
 
+export default CodeRainOverlay;
+

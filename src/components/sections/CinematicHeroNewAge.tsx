@@ -240,3 +240,5 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 );
 CinematicHeroNewAge.displayName = "CinematicHeroNewAge";
 
+export default CinematicHeroNewAge;
+
