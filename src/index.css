@@ -188,6 +188,21 @@ All colors MUST be HSL.
     }
   }
 
+  /* Code rain */
+  @keyframes code-rain-fall {
+    0% {
+      transform: translate3d(0, -120%, 0);
+    }
+    100% {
+      transform: translate3d(0, 120%, 0);
+    }
+  }
+
+  .code-rain-column {
+    animation: code-rain-fall var(--rain-duration, 10s) linear infinite;
+    will-change: transform;
+  }
+
   .snow-layer {
     --snow-duration: 13s;
     opacity: 0.55;
@@ -226,6 +241,9 @@ All colors MUST be HSL.
       animation: none;
     }
     .city-flicker {
+      animation: none;
+    }
+    .code-rain-column {
       animation: none;
     }
   }
