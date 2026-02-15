@@ -1,73 +1,76 @@
-# Welcome to your Lovable project
+# Vite + React + TypeScript + Supabase
+
+A modern React application built with Vite, TypeScript, and Supabase.
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+- **Framework**: Vite
+- **Language**: TypeScript
+- **UI Library**: React 18
+- **Component Library**: shadcn/ui
+- **Styling**: Tailwind CSS
+- **Database**: Supabase
 
-## How can I edit this code?
+## Getting Started
 
-There are several ways of editing your application.
+### Prerequisites
 
-**Use Lovable**
+- Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Setup
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Step 1: Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Step 2: Navigate to the project directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Copy environment variables
+cp .env.example .env.local
+
+# Step 5: Update .env.local with your Supabase credentials:
+# VITE_SUPABASE_URL=https://your-project.supabase.co
+# VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
+
+# Step 6: Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Available Scripts
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `npm run dev` - Start the development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
 
-**Use GitHub Codespaces**
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+├── src/
+│   ├── components/    # React components
+│   ├── lib/          # Utility functions and configs
+│   └── main.tsx      # Application entry point
+├── supabase/         # Database migrations
+└── public/           # Static assets
+```
 
-## What technologies are used for this project?
+## Database
 
-This project is built with:
+Database migrations are managed with Supabase CLI:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```sh
+# Link to your Supabase project
+npx supabase link --project-ref YOUR_PROJECT_REF
 
-## How can I deploy this project?
+# Apply migrations
+npx supabase db push
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Pull remote migrations
+npx supabase db pull
+```
