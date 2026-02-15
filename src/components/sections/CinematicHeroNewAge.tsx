@@ -9,6 +9,7 @@ import thumbColleague from "@/assets/thumb-colleague-v2.jpg";
 import thumbQa from "@/assets/thumb-qa-v2.jpg";
 import thumbAlien from "@/assets/thumb-alien-v2.jpg";
 
+import { RecruiterCards } from "@/components/sections/recruiter/RecruiterCards";
 import { CodeRainOverlay } from "@/components/visual/CodeRainOverlay";
 import { cn } from "@/lib/utils";
 
@@ -204,8 +205,8 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
             <section key={p.key} style={{ width: `${100 / contentPanelsCount}%` }}>
               <div className="h-[100svh] bg-background">
                 <div className="container">
-                  <div className="grid h-[100svh] content-center">
-                    <div className="max-w-2xl">
+                  <div className="grid h-[100svh] content-center py-10">
+                    <div className="max-w-3xl">
                       <button
                         type="button"
                         onClick={() => setPanel("home")}
@@ -221,6 +222,8 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
                       <h2 className="hero-title text-2xl leading-tight md:text-4xl">{p.title}</h2>
                       <p className="mt-3 max-w-prose text-sm leading-relaxed text-foreground/85">{p.blurb}</p>
+
+                      {p.key === "recruiter" ? <RecruiterCards /> : null}
                     </div>
                   </div>
                 </div>
