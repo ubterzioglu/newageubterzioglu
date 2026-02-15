@@ -14,7 +14,55 @@ import { cn } from "@/lib/utils";
 
 
 export function CinematicHeroNewAge({ className }: { className?: string }) {
-  const [panel, setPanel] = React.useState<"home" | "curious">("home");
+  const PANELS = [
+    "home",
+    "curious",
+    "idk",
+    "recruiter",
+    "colleague",
+    "qa",
+    "alien",
+  ] as const;
+
+  type Panel = (typeof PANELS)[number];
+
+  const [panel, setPanel] = React.useState<Panel>("home");
+  const activeIndex = Math.max(0, PANELS.indexOf(panel));
+
+  const contentPanelsCount = PANELS.length;
+
+  const personaPanels: Array<{ key: Exclude<Panel, "home">; title: string; blurb: string }> = [
+    {
+      key: "curious",
+      title: "Curious visitor",
+      blurb: "Explore who I am, what I build, and what I’m currently learning.",
+    },
+    {
+      key: "idk",
+      title: "I don't know!",
+      blurb: "No pressure—let’s start with the highlights and a guided tour.",
+    },
+    {
+      key: "recruiter",
+      title: "Recruiter",
+      blurb: "A concise overview: roles, strengths, and where I can deliver impact.",
+    },
+    {
+      key: "colleague",
+      title: "Colleague",
+      blurb: "How I collaborate: values, communication style, and working agreements.",
+    },
+    {
+      key: "qa",
+      title: "QA Engineer",
+      blurb: "My testing mindset: strategy, tooling, and quality practices I care about.",
+    },
+    {
+      key: "alien",
+      title: "Alien",
+      blurb: "Welcome, traveler. Let’s communicate via patterns and signals.",
+    },
+  ];
 
   return (
     <header className={cn("relative h-[100svh] overflow-hidden", className)}>
@@ -36,18 +84,18 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       <div className="absolute inset-0 city-flicker" aria-hidden="true" />
       <SnowfallOverlay className="opacity-100" layers={3} />
 
-
       {/* Left content */}
       <div className="relative z-10">
         {/* Sliding stage */}
         <div
-          className={cn(
-            "flex h-[100svh] w-[200%] transition-transform duration-300 ease-out",
-            panel === "curious" ? "-translate-x-1/2" : "translate-x-0",
-          )}
+          className={cn("flex h-[100svh] transition-transform duration-300 ease-out")}
+          style={{
+            width: `${contentPanelsCount * 100}%`,
+            transform: `translateX(-${activeIndex * (100 / contentPanelsCount)}%)`,
+          }}
         >
           {/* Panel: Home */}
-          <section className="w-1/2">
+          <section style={{ width: `${100 / contentPanelsCount}%` }}>
             <div className="container">
               <div className="grid h-[100svh] items-end pb-10 md:items-center md:pb-12">
                 <div className="max-w-2xl">
@@ -74,27 +122,32 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
                           {
                             title: "Curious visitor",
                             image: thumbCuriousVisitor,
-                            onClick: () => setPanel("curious"),
+                            onClick: () => setPanel("curious" as const),
                           },
                           {
                             title: "I don't know!",
                             image: thumbIDontKnow,
+                            onClick: () => setPanel("idk" as const),
                           },
                           {
                             title: "Recruiter",
                             image: thumbRecruiter,
+                            onClick: () => setPanel("recruiter" as const),
                           },
                           {
                             title: "Colleague",
                             image: thumbColleague,
+                            onClick: () => setPanel("colleague" as const),
                           },
                           {
                             title: "QA Engineer",
                             image: thumbQa,
+                            onClick: () => setPanel("qa" as const),
                           },
                           {
                             title: "Alien",
                             image: thumbAlien,
+                            onClick: () => setPanel("alien" as const),
                           },
                         ].map((opt) => (
                           <button
@@ -125,7 +178,9 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
 
                               <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
                                 <div className="min-w-0">
-                                  <p className="text-[15px] font-semibold leading-tight tracking-tight text-foreground sm:text-base">{opt.title}</p>
+                                  <p className="text-[15px] font-semibold leading-tight tracking-tight text-foreground sm:text-base">
+                                    {opt.title}
+                                  </p>
                                 </div>
 
                                 <span
@@ -146,34 +201,34 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
             </div>
           </section>
 
-          {/* Panel: Curious visitor */}
-          <section className="w-1/2">
-            <div className="h-[100svh] bg-background">
-              <div className="container">
-                <div className="grid h-[100svh] content-center">
-                  <div className="max-w-2xl">
-                    <button
-                      type="button"
-                      onClick={() => setPanel("home")}
-                      className={cn(
-                        "mb-6 inline-flex items-center gap-2 rounded-full border bg-card/40 px-3 py-1 text-sm",
-                        "transition-colors hover:bg-card/55",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                      )}
-                    >
-                      <span aria-hidden="true">‹</span>
-                      Back
-                    </button>
+          {/* Persona panels */}
+          {personaPanels.map((p) => (
+            <section key={p.key} style={{ width: `${100 / contentPanelsCount}%` }}>
+              <div className="h-[100svh] bg-background">
+                <div className="container">
+                  <div className="grid h-[100svh] content-center">
+                    <div className="max-w-2xl">
+                      <button
+                        type="button"
+                        onClick={() => setPanel("home")}
+                        className={cn(
+                          "mb-6 inline-flex items-center gap-2 rounded-full border bg-card/40 px-3 py-1 text-sm",
+                          "transition-colors hover:bg-card/55",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        )}
+                      >
+                        <span aria-hidden="true">‹</span>
+                        Back
+                      </button>
 
-                    <h2 className="hero-title text-2xl leading-tight md:text-4xl">Curious visitor</h2>
-                    <p className="mt-3 max-w-prose text-sm leading-relaxed text-foreground/85">
-                      This is the first “slide” page concept. Background goes clean/dark, but snowfall stays.
-                    </p>
+                      <h2 className="hero-title text-2xl leading-tight md:text-4xl">{p.title}</h2>
+                      <p className="mt-3 max-w-prose text-sm leading-relaxed text-foreground/85">{p.blurb}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          ))}
         </div>
       </div>
 
