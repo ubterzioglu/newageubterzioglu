@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import heroImage from "@/assets/hero-ubterzioglu-workstation-cyan.jpg";
+import heroImage from "@/assets/hero-ubterzioglu-user-ohbe.png";
 
 import thumbCuriousVisitor from "@/assets/thumb-curious-visitor-v2.jpg";
 import thumbIDontKnow from "@/assets/thumb-i-dont-know-v2.jpg";
