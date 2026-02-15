@@ -67,7 +67,7 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
   ];
 
   return (
-    <header ref={ref} className={cn("relative h-[100svh] overflow-hidden", className)}>
+    <header ref={ref} className={cn("relative min-h-[100svh] overflow-x-hidden overflow-y-auto", className)}>
       {/* Background image */}
       <div className="absolute inset-0">
         <img
