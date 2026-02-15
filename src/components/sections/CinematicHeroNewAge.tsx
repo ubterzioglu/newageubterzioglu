@@ -203,9 +203,9 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
           {/* Persona panels */}
           {personaPanels.map((p) => (
             <section key={p.key} style={{ width: `${100 / contentPanelsCount}%` }}>
-              <div className="h-[100svh] bg-background">
+              <div className="min-h-[100svh] bg-background">
                 <div className="container">
-                  <div className="grid h-[100svh] content-center py-10">
+                  <div className="min-h-[100svh] py-10">
                     <div className="max-w-3xl">
                       <button
                         type="button"

@@ -15,74 +15,21 @@ type RecruiterCard = {
 const CARDS: RecruiterCard[] = [
   {
     title: "My CV",
-    description: "A detailed overview of my professional background, skills, and experience.",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-primary",
     textClassName: "text-primary-foreground",
-    actions: [
-      { label: "View LinkedIn", href: "https://www.linkedin.com/in/umutbaristerzioglu" },
-      { label: "Request CV by Email", href: "mailto:contact@ubterzioglu.de" },
-    ],
   },
   {
     title: "About Me",
-    description:
-      "I'm Umut Barış Terzioğlu, a Senior Software Quality Assurance Engineer passionate about building reliable software systems.",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-glow",
     textClassName: "text-foreground",
-    actions: [
-      { label: "Experience", href: "https://ubterzioglu.de/zrecruiter.html#experience" },
-      { label: "Tech Stack", href: "https://ubterzioglu.de/zrecruiter.html#tech" },
-    ],
-  },
-  {
-    title: "Key Achievements",
-    description:
-      "Senior QA engineer with a proven track record; automation wins; strong focus on code quality; continuous learner.",
-    toneClassName: "bg-energy",
-    textClassName: "text-energy-foreground",
   },
   {
     title: "Tech Stack",
-    description:
-      "Testing: Selenium, Playwright, Cypress · Languages: JavaScript, Python, TypeScript · Tools: Git, Docker, CI/CD",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-cta",
     textClassName: "text-cta-foreground",
-  },
-  {
-    title: "Experience",
-    description:
-      "Leading QA initiatives, implementing automated testing frameworks, ensuring reliability across multiple projects.",
-    toneClassName: "bg-success",
-    textClassName: "text-success-foreground",
-    actions: [{ label: "View Full Profile", href: "https://www.linkedin.com/in/umutbaristerzioglu" }],
-  },
-  {
-    title: "Corporate Projects",
-    description: "Professional projects focused on quality assurance, automation, and testing infrastructure.",
-    toneClassName: "bg-depth",
-    textClassName: "text-foreground",
-    actions: [{ label: "Contact Me", href: "mailto:contact@ubterzioglu.de" }],
-  },
-  {
-    title: "Private Projects",
-    description: "Personal projects exploring various technologies and ideas.",
-    toneClassName: "bg-secondary",
-    textClassName: "text-secondary-foreground",
-    actions: [
-      { label: "Explore Tools", href: "https://ubterzioglu.de/ztools.html" },
-      { label: "View Apps", href: "https://ubterzioglu.de/zapps.html" },
-    ],
-  },
-  {
-    title: "Contact",
-    description: "contact@ubterzioglu.de · LinkedIn · ubterzioglu.de",
-    toneClassName: "bg-card",
-    textClassName: "text-card-foreground",
-    actions: [
-      { label: "Email", href: "mailto:contact@ubterzioglu.de" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/umutbaristerzioglu" },
-      { label: "Website", href: "https://ubterzioglu.de/" },
-    ],
   },
 ];
 
@@ -126,7 +73,7 @@ function RecruiterCardView({ card }: { card: RecruiterCard }) {
 export function RecruiterCards({ className }: { className?: string }) {
   return (
     <section className={cn("mt-8", className)} aria-label="Recruiter cards">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {CARDS.map((c) => (
           <RecruiterCardView key={c.title} card={c} />
         ))}
