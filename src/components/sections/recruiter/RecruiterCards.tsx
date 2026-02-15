@@ -14,22 +14,70 @@ type RecruiterCard = {
 
 const CARDS: RecruiterCard[] = [
   {
+    title: "Welcome",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-card",
+    textClassName: "text-card-foreground",
+  },
+  {
+    title: "Tools Developed by UBT (me)",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-secondary",
+    textClassName: "text-secondary-foreground",
+  },
+  {
     title: "My CV",
     description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-primary",
     textClassName: "text-primary-foreground",
   },
   {
-    title: "About Me",
+    title: "Support",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-success",
+    textClassName: "text-success-foreground",
+  },
+  {
+    title: "About me",
     description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-glow",
     textClassName: "text-foreground",
+  },
+  {
+    title: "Key Achievements",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-energy",
+    textClassName: "text-energy-foreground",
   },
   {
     title: "Tech Stack",
     description: "(Placeholder) — içerikleri sen vereceksin.",
     toneClassName: "bg-cta",
     textClassName: "text-cta-foreground",
+  },
+  {
+    title: "Experience",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-depth",
+    textClassName: "text-foreground",
+  },
+  {
+    title: "Corporate Projects",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-muted",
+    textClassName: "text-foreground",
+  },
+  {
+    title: "Private Projects",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-accent",
+    textClassName: "text-accent-foreground",
+  },
+  {
+    title: "Contact",
+    description: "(Placeholder) — içerikleri sen vereceksin.",
+    toneClassName: "bg-primary",
+    textClassName: "text-primary-foreground",
   },
 ];
 
@@ -73,7 +121,7 @@ function RecruiterCardView({ card }: { card: RecruiterCard }) {
 export function RecruiterCards({ className }: { className?: string }) {
   return (
     <section className={cn("mt-8", className)} aria-label="Recruiter cards">
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {CARDS.map((c) => (
           <RecruiterCardView key={c.title} card={c} />
         ))}
