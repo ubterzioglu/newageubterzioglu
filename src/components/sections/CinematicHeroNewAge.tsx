@@ -178,9 +178,7 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
                               <div className="flex min-w-0 flex-1 items-center gap-3 px-3">
                                 <div className="min-w-0">
-                                  <p className="text-[15px] font-semibold leading-tight tracking-tight text-foreground sm:text-base">
-                                    {opt.title}
-                                  </p>
+                                  <p className="text-[22px] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">{opt.title}</p>
                                 </div>
 
                                 <span
