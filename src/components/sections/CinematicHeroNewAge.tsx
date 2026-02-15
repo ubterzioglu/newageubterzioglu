@@ -30,7 +30,7 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
   const [panel, setPanel] = React.useState<Panel>("home");
   const activeIndex = Math.max(0, PANELS.indexOf(panel));
-
+  const isHome = panel === "home";
   const contentPanelsCount = PANELS.length;
 
   const personaPanels: Array<{ key: Exclude<Panel, "home">; title: string; blurb: string }> = [
@@ -67,7 +67,14 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
   ];
 
   return (
-    <header ref={ref} className={cn("relative min-h-[100svh] overflow-x-hidden overflow-y-auto", className)}>
+    <header
+      ref={ref}
+      className={cn(
+        "relative min-h-[100svh] overflow-x-hidden",
+        isHome ? "overflow-y-hidden" : "overflow-y-auto",
+        className,
+      )}
+    >
       {/* Background image */}
       <div className="absolute inset-0">
         <img
