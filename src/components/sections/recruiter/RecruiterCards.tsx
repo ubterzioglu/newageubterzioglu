@@ -68,7 +68,10 @@ function RecruiterCardView({ card, index }: { card: RecruiterCard; index: number
 export function RecruiterCards({ className }: { className?: string }) {
   return (
     <section className={cn("mt-8", className)} aria-label="Recruiter cards">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+      <div
+        className="grid justify-center gap-4"
+        style={{ gridTemplateColumns: "repeat(auto-fit, 350px)" }}
+      >
         {CARDS.map((c, idx) => (
           <RecruiterCardView key={c.title} card={c} index={idx} />
         ))}
