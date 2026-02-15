@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import heroImage from "@/assets/hero-ubterzioglu-night-city.jpg";
+import heroImage from "@/assets/hero-ubterzioglu-workstation-cyan.jpg";
 
 import thumbCuriousVisitor from "@/assets/thumb-curious-visitor-v2.jpg";
 import thumbIDontKnow from "@/assets/thumb-i-dont-know-v2.jpg";
@@ -9,7 +9,7 @@ import thumbColleague from "@/assets/thumb-colleague-v2.jpg";
 import thumbQa from "@/assets/thumb-qa-v2.jpg";
 import thumbAlien from "@/assets/thumb-alien-v2.jpg";
 
-import { SnowfallOverlay } from "@/components/visual/SnowfallOverlay";
+import { CodeRainOverlay } from "@/components/visual/CodeRainOverlay";
 import { cn } from "@/lib/utils";
 
 
@@ -70,8 +70,8 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="A cinematic night scene with a trench coat silhouette looking at a futuristic city in the distance"
-          className="h-full w-full object-cover object-[68%_92%] origin-bottom scale-[1.18]"
+          alt="A cinematic night office scene with a software tester and developer sitting at a desk, back turned, illuminated by cyan monitor glow"
+          className="h-full w-full object-cover object-[64%_55%]"
           loading="eager"
           decoding="async"
         />
@@ -81,8 +81,7 @@ export function CinematicHeroNewAge({ className }: { className?: string }) {
 
       {/* Ambient overlays */}
       <div className="absolute inset-0 bg-aurora" aria-hidden="true" />
-      <div className="absolute inset-0 city-flicker" aria-hidden="true" />
-      <SnowfallOverlay className="opacity-100" layers={3} />
+      <CodeRainOverlay className="opacity-100" layers={3} />
 
       {/* Left content */}
       <div className="relative z-10">
