@@ -120,16 +120,6 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
                       <div className="grid gap-2 sm:grid-cols-2">
                         {[
                           {
-                            title: "Curious visitor",
-                            image: thumbCuriousVisitor,
-                            onClick: () => setPanel("curious" as const),
-                          },
-                          {
-                            title: "I don't know!",
-                            image: thumbIDontKnow,
-                            onClick: () => setPanel("idk" as const),
-                          },
-                          {
                             title: "Recruiter",
                             image: thumbRecruiter,
                             onClick: () => setPanel("recruiter" as const),
@@ -148,6 +138,16 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
                             title: "Alien",
                             image: thumbAlien,
                             onClick: () => setPanel("alien" as const),
+                          },
+                          {
+                            title: "Curious visitor",
+                            image: thumbCuriousVisitor,
+                            onClick: () => setPanel("curious" as const),
+                          },
+                          {
+                            title: "I don't know!",
+                            image: thumbIDontKnow,
+                            onClick: () => setPanel("idk" as const),
                           },
                         ].map((opt) => (
                           <button
