@@ -80,7 +80,8 @@ export function CodeRainOverlay({ className, layers = 2, columns = 26 }: CodeRai
                 // eslint-disable-next-line react/no-array-index-key
                 key={i}
                 className={cn(
-                  "code-rain-column absolute -top-[120%] whitespace-pre select-none",
+                  "code-rain-column absolute whitespace-pre select-none",
+                  reducedMotion ? "top-0" : "-top-[120%]",
                   "font-mono tracking-[-0.02em]",
                   "text-primary/90",
                 )}
@@ -90,9 +91,14 @@ export function CodeRainOverlay({ className, layers = 2, columns = 26 }: CodeRai
                   lineHeight: 1.05,
                   opacity: layer.opacity,
                   filter: `blur(${layer.blur}px) drop-shadow(0 0 14px hsl(var(--primary) / 0.22))`,
-                  animationDelay: reducedMotion ? undefined : `${delay}s`,
-                  // @ts-expect-error - CSS var
-                  "--rain-duration": reducedMotion ? undefined : `${duration}s`,
+                  ...(reducedMotion
+                    ? {
+                        transform: "translate3d(0, 0, 0)",
+                      }
+                    : {
+                        // CSS custom property
+                        "--rain-duration": `${duration}s`,
+                      }),
                 }}
               >
                 {makeColumnString(i + layerIdx * 17)}
