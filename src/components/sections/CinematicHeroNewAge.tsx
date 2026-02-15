@@ -229,9 +229,10 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
 
                       <h2 className="hero-title text-2xl leading-tight md:text-4xl">{p.title}</h2>
                       <p className="mt-3 max-w-prose text-sm leading-relaxed text-foreground/85">{p.blurb}</p>
-
-                      {p.key === "recruiter" ? <RecruiterCards /> : null}
                     </div>
+
+                    {p.key === "recruiter" ? <RecruiterCards /> : null}
+                  </div>
                   </div>
                 </div>
               </div>
