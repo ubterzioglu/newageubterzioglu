@@ -35,9 +35,7 @@ function RecruiterCardView({ card, index }: { card: RecruiterCard; index: number
   const tone = CARD_TONES[index % CARD_TONES.length];
 
   return (
-    	<article
-      className={cn("rounded-3xl border shadow-glass", "p-5 md:p-6", tone.bg, tone.text)}
-    >
+    <article className={cn("w-full max-w-[350px] rounded-3xl border shadow-glass", "p-5 md:p-6", tone.bg, tone.text)}>
       <h3 className={cn("text-lg font-semibold tracking-tight md:text-xl", tone.text)}>{card.title}</h3>
       <p className={cn("mt-2 text-sm leading-relaxed opacity-90", tone.text)}>{card.description}</p>
 
@@ -68,10 +66,7 @@ function RecruiterCardView({ card, index }: { card: RecruiterCard; index: number
 export function RecruiterCards({ className }: { className?: string }) {
   return (
     <section className={cn("mt-8", className)} aria-label="Recruiter cards">
-      <div
-        className="grid justify-center gap-4"
-        style={{ gridTemplateColumns: "repeat(auto-fit, 350px)" }}
-      >
+      <div className="flex flex-wrap justify-center gap-4">
         {CARDS.map((c, idx) => (
           <RecruiterCardView key={c.title} card={c} index={idx} />
         ))}
