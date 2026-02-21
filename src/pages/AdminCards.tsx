@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { PERSONAS, type ContentCard, type Persona } from "@/lib/cards-schema";
 import { fetchCards, replaceCardActions, upsertCard } from "@/lib/cards-api";
 import { signOut } from "@/lib/auth-api";
+import { SYSTEM_CARDS, isSystemCardId } from "@/lib/system-cards";
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDropzone } from "react-dropzone";
@@ -48,10 +49,15 @@ export default function AdminCardsPage() {
     queryFn: () => fetchCards(persona),
   });
 
+  const combinedCards = React.useMemo(() => {
+    const system = SYSTEM_CARDS.filter((c) => c.persona === persona);
+    return [...system, ...(cards ?? [])];
+  }, [cards, persona]);
+
   const selected = React.useMemo(() => {
-    const found = cards?.find((c) => c.id === selectedId);
+    const found = combinedCards?.find((c) => c.id === selectedId);
     return found ?? null;
-  }, [cards, selectedId]);
+  }, [combinedCards, selectedId]);
 
   const [draft, setDraft] = React.useState<EditorState>(emptyCard(persona));
 
@@ -75,6 +81,7 @@ export default function AdminCardsPage() {
   });
 
   async function onSave() {
+    if (isSystemCardId(selectedId)) return;
     // upsert card, then replace actions
     const id = await upsertCard({ ...draft, persona });
     await replaceCardActions(id, draft.actions ?? []);
@@ -84,6 +91,7 @@ export default function AdminCardsPage() {
   }
 
   async function onDelete() {
+    if (isSystemCardId(selectedId)) return;
     if (!selected?.id) return;
     if (!confirm("Delete this card?")) return;
 
@@ -134,7 +142,7 @@ export default function AdminCardsPage() {
                 {isLoading ? <p className="text-sm text-muted-foreground">Loading…</p> : null}
                 {error ? <p className="text-sm text-destructive">Failed to load cards</p> : null}
 
-                {(cards ?? []).map((c) => (
+                {(combinedCards ?? []).map((c) => (
                   <button
                     key={c.id}
                     type="button"
@@ -144,7 +152,10 @@ export default function AdminCardsPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <p className="truncate text-sm font-medium">{c.title}</p>
+                      <p className="truncate text-sm font-medium">
+                        {c.title}
+                        {isSystemCardId(c.id) ? <span className="ml-2 text-xs text-muted-foreground">(system)</span> : null}
+                      </p>
                       <span className="text-xs text-muted-foreground">#{c.sort_order}</span>
                     </div>
                     <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{c.description}</p>
@@ -158,136 +169,167 @@ export default function AdminCardsPage() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-sm font-medium">Editor</p>
                 <div className="flex gap-2">
-                  {selected?.id ? (
-                    <Button variant="destructive" onClick={onDelete}>Delete</Button>
+                  {selected?.id && !isSystemCardId(selected.id) ? (
+                    <Button variant="destructive" onClick={onDelete}>
+                      Delete
+                    </Button>
                   ) : null}
-                  <Button onClick={onSave}>Save</Button>
+                  <Button onClick={onSave} disabled={isSystemCardId(selectedId)}>
+                    Save
+                  </Button>
                 </div>
               </div>
 
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="space-y-1">
-                  <label className="text-sm">Title</label>
-                  <Input value={draft.title} onChange={(e) => setDraft((d) => ({ ...d, title: e.target.value }))} />
+              {isSystemCardId(selectedId) ? (
+                <div className="mt-4 rounded-2xl border bg-background/30 p-4">
+                  <p className="text-sm font-medium">System card</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Bu kart admin panelinden eklenemez/düzenlenemez. /cards sayfasında özel tasarımla render edilir.
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <Button variant="secondary" onClick={() => window.location.assign("/cards")}>/cards aç</Button>
+                    <Button variant="outline" onClick={() => setSelectedId(null)}>Yeni normal kart</Button>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <label className="text-sm">Sort order</label>
-                  <Input
-                    type="number"
-                    value={draft.sort_order}
-                    onChange={(e) => setDraft((d) => ({ ...d, sort_order: Number(e.target.value) }))}
-                  />
-                </div>
-              </div>
+              ) : (
+                <>
+                  <div className="mt-4 grid gap-4 md:grid-cols-2">
+                    <div className="space-y-1">
+                      <label className="text-sm">Title</label>
+                      <Input value={draft.title} onChange={(e) => setDraft((d) => ({ ...d, title: e.target.value }))} />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-sm">Sort order</label>
+                      <Input
+                        type="number"
+                        value={draft.sort_order}
+                        onChange={(e) => setDraft((d) => ({ ...d, sort_order: Number(e.target.value) }))}
+                      />
+                    </div>
+                  </div>
 
-              <div className="mt-4 space-y-1">
-                <label className="text-sm">Description</label>
-                <Textarea
-                  value={draft.description}
-                  onChange={(e) => setDraft((d) => ({ ...d, description: e.target.value }))}
-                  rows={5}
-                />
-              </div>
-
-              <div className="mt-4">
-                <label className="text-sm">Image</label>
-                <div
-                  {...getRootProps()}
-                  className={`mt-2 rounded-2xl border bg-background/40 p-4 text-sm text-muted-foreground ${
-                    isDragActive ? "ring-2 ring-ring" : ""
-                  }`}
-                >
-                  <input {...getInputProps()} />
-                  <p>{draft.image_path ? "Drop to replace image" : "Drop an image here to upload"}</p>
-                  {draft.image_path ? (
-                    <img
-                      src={draft.image_path}
-                      alt="Card image preview"
-                      className="mt-3 h-40 w-full rounded-xl object-cover"
-                      loading="lazy"
-                      decoding="async"
+                  <div className="mt-4 space-y-1">
+                    <label className="text-sm">Description</label>
+                    <Textarea
+                      value={draft.description}
+                      onChange={(e) => setDraft((d) => ({ ...d, description: e.target.value }))}
+                      rows={5}
                     />
-                  ) : null}
-                </div>
-                <div className="mt-2 space-y-1">
-                  <label className="text-xs text-muted-foreground">Or paste URL</label>
-                  <Input
-                    value={draft.image_path ?? ""}
-                    onChange={(e) => setDraft((d) => ({ ...d, image_path: e.target.value || null }))}
-                    placeholder="https://..."
-                  />
-                </div>
-              </div>
+                  </div>
+                </>
+              )}
 
-              <div className="mt-6">
-                <Tabs defaultValue="actions">
-                  <TabsList>
-                    <TabsTrigger value="actions">Actions</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="actions">
-                    <div className="space-y-2">
-                      {(draft.actions ?? []).map((a, idx) => (
-                        <div key={idx} className="grid gap-2 rounded-xl border bg-background/20 p-3 md:grid-cols-[1fr_1.3fr_90px_36px]">
-                          <Input
-                            value={a.label}
-                            onChange={(e) =>
-                              setDraft((d) => {
-                                const next = [...(d.actions ?? [])];
-                                next[idx] = { ...next[idx], label: e.target.value };
-                                return { ...d, actions: next };
-                              })
-                            }
-                            placeholder="Label"
-                          />
-                          <Input
-                            value={a.href}
-                            onChange={(e) =>
-                              setDraft((d) => {
-                                const next = [...(d.actions ?? [])];
-                                next[idx] = { ...next[idx], href: e.target.value };
-                                return { ...d, actions: next };
-                              })
-                            }
-                            placeholder="/path or https://..."
-                          />
-                          <Input
-                            type="number"
-                            value={a.sort_order ?? idx}
-                            onChange={(e) =>
-                              setDraft((d) => {
-                                const next = [...(d.actions ?? [])];
-                                next[idx] = { ...next[idx], sort_order: Number(e.target.value) };
-                                return { ...d, actions: next };
-                              })
-                            }
-                          />
+              {!isSystemCardId(selectedId) ? (
+                <>
+                  <div className="mt-4">
+                    <label className="text-sm">Image</label>
+                    <div
+                      {...getRootProps()}
+                      className={`mt-2 rounded-2xl border bg-background/40 p-4 text-sm text-muted-foreground ${
+                        isDragActive ? "ring-2 ring-ring" : ""
+                      }`}
+                    >
+                      <input {...getInputProps()} />
+                      <p>{draft.image_path ? "Drop to replace image" : "Drop an image here to upload"}</p>
+                      {draft.image_path ? (
+                        <img
+                          src={draft.image_path}
+                          alt="Card image preview"
+                          className="mt-3 h-40 w-full rounded-xl object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="mt-2 space-y-1">
+                      <label className="text-xs text-muted-foreground">Or paste URL</label>
+                      <Input
+                        value={draft.image_path ?? ""}
+                        onChange={(e) => setDraft((d) => ({ ...d, image_path: e.target.value || null }))}
+                        placeholder="https://..."
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <Tabs defaultValue="actions">
+                      <TabsList>
+                        <TabsTrigger value="actions">Actions</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="actions">
+                        <div className="space-y-2">
+                          {(draft.actions ?? []).map((a, idx) => (
+                            <div
+                              key={idx}
+                              className="grid gap-2 rounded-xl border bg-background/20 p-3 md:grid-cols-[1fr_1.3fr_90px_36px]"
+                            >
+                              <Input
+                                value={a.label}
+                                onChange={(e) =>
+                                  setDraft((d) => {
+                                    const next = [...(d.actions ?? [])];
+                                    next[idx] = { ...next[idx], label: e.target.value };
+                                    return { ...d, actions: next };
+                                  })
+                                }
+                                placeholder="Label"
+                              />
+                              <Input
+                                value={a.href}
+                                onChange={(e) =>
+                                  setDraft((d) => {
+                                    const next = [...(d.actions ?? [])];
+                                    next[idx] = { ...next[idx], href: e.target.value };
+                                    return { ...d, actions: next };
+                                  })
+                                }
+                                placeholder="/path or https://..."
+                              />
+                              <Input
+                                type="number"
+                                value={a.sort_order ?? idx}
+                                onChange={(e) =>
+                                  setDraft((d) => {
+                                    const next = [...(d.actions ?? [])];
+                                    next[idx] = { ...next[idx], sort_order: Number(e.target.value) };
+                                    return { ...d, actions: next };
+                                  })
+                                }
+                              />
+                              <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() =>
+                                  setDraft((d) => {
+                                    const next = [...(d.actions ?? [])];
+                                    next.splice(idx, 1);
+                                    return { ...d, actions: next };
+                                  })
+                                }
+                              >
+                                ×
+                              </Button>
+                            </div>
+                          ))}
+
                           <Button
                             type="button"
-                            variant="outline"
+                            variant="secondary"
                             onClick={() =>
-                              setDraft((d) => {
-                                const next = [...(d.actions ?? [])];
-                                next.splice(idx, 1);
-                                return { ...d, actions: next };
-                              })
+                              setDraft((d) => ({
+                                ...d,
+                                actions: [...(d.actions ?? []), { label: "", href: "", sort_order: (d.actions ?? []).length }],
+                              }))
                             }
                           >
-                            ×
+                            Add action
                           </Button>
                         </div>
-                      ))}
-
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        onClick={() => setDraft((d) => ({ ...d, actions: [...(d.actions ?? []), { label: "", href: "", sort_order: (d.actions ?? []).length }] }))}
-                      >
-                        Add action
-                      </Button>
-                    </div>
-                  </TabsContent>
-                </Tabs>
-              </div>
+                      </TabsContent>
+                    </Tabs>
+                  </div>
+                </>
+              ) : null}
             </section>
           </div>
         </div>
