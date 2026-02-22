@@ -90,9 +90,9 @@ export const CinematicHeroNewAge = React.forwardRef<HTMLElement, { className?: s
       </div>
 
       {/* Ambient overlays */}
-      <InterferenceOverlay className="z-[1]" strength="subtle" />
+      <InterferenceOverlay className="z-[1]" strength="medium" />
       <div className="absolute inset-0 bg-aurora" aria-hidden="true" />
-      <CodeRainOverlay className="z-[2] opacity-95" layers={3} columns={28} />
+      <CodeRainOverlay className="z-[2] opacity-95" layers={3} columns={28} respectReducedMotion={false} />
 
       {/* Left content */}
       <div className="relative z-10">
