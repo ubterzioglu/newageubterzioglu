@@ -15,14 +15,14 @@ export function InterferenceOverlay({
   className,
   strength = "subtle",
 }: InterferenceOverlayProps) {
-  const opacity = strength === "medium" ? "opacity-70" : "opacity-55";
+  const opacity = strength === "medium" ? "opacity-80" : "opacity-65";
 
   return (
     <div
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0",
-        "mix-blend-mode-screen",
+        "pointer-events-none absolute inset-0 z-[1]",
+        "mix-blend-soft-light",
         opacity,
         className,
       )}
@@ -31,7 +31,7 @@ export function InterferenceOverlay({
       <div
         className={cn(
           "absolute inset-0",
-          "bg-[repeating-linear-gradient(to_bottom,hsl(var(--foreground)/0.06)_0px,hsl(var(--foreground)/0.06)_1px,transparent_3px,transparent_6px)]",
+          "bg-[repeating-linear-gradient(to_bottom,hsl(var(--foreground)/0.10)_0px,hsl(var(--foreground)/0.10)_1px,transparent_3px,transparent_6px)]",
           "animate-[interference-scan_7.5s_linear_infinite]",
         )}
       />
