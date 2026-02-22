@@ -239,10 +239,10 @@ const CardShell = ({
       <div className="flex items-start justify-between gap-3 p-5">
         <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
         <div className="flex gap-2">
-          <Button asChild size="icon" variant="outline" className="h-9 w-9 rounded-xl">
+          <Button asChild size="sm" variant="outline" className="rounded-xl">
             <Link to="/">Home</Link>
           </Button>
-          <Button asChild size="icon" variant="outline" className="h-9 w-9 rounded-xl">
+          <Button asChild size="sm" variant="outline" className="rounded-xl">
             <a href="#top">Top</a>
           </Button>
         </div>
