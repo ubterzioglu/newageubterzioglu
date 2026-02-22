@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { Download, ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import avatarImage from "@/assets/hero-ubterzioglu-user-ohbe.png";
 
 type Bullet = {
@@ -215,10 +217,12 @@ const techStack = {
 const CardShell = ({
   title,
   variant,
+  className,
   children,
 }: {
   title: string;
   variant: "cyan" | "orange" | "green" | "purple" | "yellow";
+  className?: string;
   children: React.ReactNode;
 }) => {
   const variants: Record<typeof variant, string> = {
@@ -235,7 +239,13 @@ const CardShell = ({
   };
 
   return (
-    <section className={`relative overflow-hidden rounded-[28px] border shadow-glass backdrop-blur ${variants[variant]}`}>
+    <section
+      className={cn(
+        "relative overflow-hidden rounded-[28px] border shadow-glass backdrop-blur",
+        variants[variant],
+        className
+      )}
+    >
       <div className="flex items-start justify-between gap-3 p-5">
         <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
         <div className="flex gap-2">
@@ -259,7 +269,53 @@ const BulletLine = ({ b }: { b: Bullet }) => (
   </li>
 );
 
+function CvRow({
+  flag,
+  title,
+  subtitle,
+  href,
+}: {
+  flag: string;
+  title: string;
+  subtitle: string;
+  href: string;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-2xl border bg-card/25 p-4 shadow-sm transition hover:bg-card/35">
+      <div className="min-w-0">
+        <p className="text-sm font-semibold">
+          <span className="mr-2" aria-hidden="true">
+            {flag}
+          </span>
+          {title}
+        </p>
+        <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
+      </div>
+
+      <div className="flex shrink-0 items-center gap-2">
+        <Button asChild size="sm" variant="secondary" className="rounded-xl">
+          <a href={href} target="_blank" rel="noreferrer" aria-label={`${title} PDF (open)`}>
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Open
+          </a>
+        </Button>
+        <Button asChild size="sm" variant="outline" className="rounded-xl">
+          <a href={href} target="_blank" rel="noreferrer" aria-label={`${title} PDF (download)`}>
+            <Download className="mr-2 h-4 w-4" />
+            PDF
+          </a>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export default function CardsPage() {
+  const cvLinks = {
+    en: "https://drive.google.com/file/d/1T5yUafZI9nRv1aVWeEKBHcU6apZOojP2/view",
+    de: "https://drive.google.com/file/d/15_4pguyDYAYtoqYs_7rwCCzdHknfvZ6D/view",
+  };
+
   return (
     <main id="top" className="min-h-screen bg-background">
       <div className="container py-10">
@@ -279,17 +335,19 @@ export default function CardsPage() {
         </header>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <CardShell title="My CV" variant="cyan">
+          <CardShell
+            title="My CV"
+            variant="cyan"
+            className="bg-[radial-gradient(120%_120%_at_0%_0%,hsl(var(--primary)/.55),transparent_56%),linear-gradient(135deg,hsl(var(--secondary))_0%,hsl(var(--background))_100%)]"
+          >
             <div className="space-y-3">
-              <div className="rounded-2xl border bg-card/30 p-4">
-                <p className="text-sm font-medium">🇬🇧 English CV</p>
-                <p className="text-xs text-muted-foreground">View / Download (PDF)</p>
+              <div className="rounded-2xl border bg-card/20 p-4">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground">PDF · ATS-friendly · Updated regularly</p>
+                <p className="mt-1 text-sm">Choose language and open the PDF.</p>
               </div>
-              <div className="rounded-2xl border bg-card/30 p-4">
-                <p className="text-sm font-medium">🇩🇪 German CV</p>
-                <p className="text-xs text-muted-foreground">View / Download (PDF)</p>
-              </div>
-              <p className="text-xs text-muted-foreground">PDF · ATS-friendly · Updated regularly</p>
+
+              <CvRow flag="🇬🇧" title="English CV" subtitle="View / Download (PDF)" href={cvLinks.en} />
+              <CvRow flag="🇩🇪" title="German CV" subtitle="View / Download (PDF)" href={cvLinks.de} />
             </div>
           </CardShell>
 
