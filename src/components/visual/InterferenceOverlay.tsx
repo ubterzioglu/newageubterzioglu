@@ -31,7 +31,7 @@ export function InterferenceOverlay({
       <div
         className={cn(
           "absolute inset-0",
-          "bg-[repeating-linear-gradient(to_bottom,hsl(var(--foreground)/0.12)_0px,hsl(var(--foreground)/0.12)_1px,transparent_3px,transparent_6px)]",
+          "bg-[repeating-linear-gradient(to_bottom,hsl(var(--foreground)/0.24)_0px,hsl(var(--foreground)/0.24)_1px,transparent_3px,transparent_6px)]",
           "animate-[interference-scan_4.6s_linear_infinite]",
         )}
       />
@@ -60,10 +60,11 @@ export function InterferenceOverlay({
       <div
         className={cn(
           "absolute -inset-x-12 inset-y-0",
-          "bg-[linear-gradient(90deg,transparent_0%,hsl(var(--primary)/0.00)_38%,hsl(var(--primary)/0.22)_50%,hsl(var(--glow)/0.18)_56%,transparent_72%)]",
+          "bg-[linear-gradient(90deg,transparent_0%,hsl(var(--primary)/0.00)_38%,hsl(var(--primary)/0.44)_50%,hsl(var(--glow)/0.36)_56%,transparent_72%)]",
           "mix-blend-screen",
           "animate-[interference-sweep_3.4s_ease-in-out_infinite]",
-          "opacity-70",
+          "opacity-90",
+          "[filter:contrast(1.12)]",
         )}
       />
 
