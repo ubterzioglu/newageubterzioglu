@@ -15,14 +15,14 @@ export function InterferenceOverlay({
   className,
   strength = "subtle",
 }: InterferenceOverlayProps) {
-  const opacity = strength === "medium" ? "opacity-80" : "opacity-65";
+  const opacity = strength === "medium" ? "opacity-95" : "opacity-85";
 
   return (
     <div
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 z-[1]",
-        "mix-blend-soft-light",
+        "mix-blend-normal",
         opacity,
         className,
       )}
@@ -108,16 +108,6 @@ export function InterferenceOverlay({
           50% { transform: translate3d(-0.35%, 0.35%, 0); opacity: 0.30; filter: blur(0px); }
           75% { transform: translate3d(0.25%, 0.1%, 0); opacity: 0.55; filter: blur(0.25px); }
           100% { transform: translate3d(0, 0, 0); opacity: 0.35; filter: blur(0px); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-[interference-scan_4.6s_linear_infinite],
-          .animate-[interference-drift_6.5s_ease-in-out_infinite],
-          .animate-[interference-grain_1.2s_steps(2)_infinite],
-          .animate-[interference-sweep_3.4s_ease-in-out_infinite],
-          .animate-[interference-jitter_820ms_steps(2)_infinite] {
-            animation: none !important;
-          }
         }
       `}</style>
     </div>
