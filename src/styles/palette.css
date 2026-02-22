@@ -1,0 +1,27 @@
+/*
+  Color Palette Reference (from your screenshot)
+  Purpose: Keep a single source-of-truth list of brand colors for cards/accents.
+  Note: This file is a reference palette. Import it only if/when you want these
+  variables to affect the app theme.
+
+  If you want exact values, send the HEX/HSL codes and I’ll replace these.
+*/
+
+:root {
+  /* almanya101 */
+  --pal-almanya101-red: #d10000;
+  --pal-almanya101-yellow: #ffc400;
+  --pal-almanya101-white: #ffffff;
+  --pal-almanya101-black: #000000;
+  --pal-almanya101-purple: #7a00ff;
+
+  /* UBT */
+  --pal-ubt-blue: #00a8ff;
+  --pal-ubt-green: #79d600;
+  --pal-ubt-orange: #ff5a00;
+  --pal-ubt-purple: #7a00ff;
+  --pal-ubt-yellow: #ffc400;
+  --pal-ubt-black: #000000;
+  --pal-ubt-red: #d10000;
+  --pal-ubt-white: #ffffff;
+}
