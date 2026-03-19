@@ -1,0 +1,51 @@
+/*
+  Color Palette Reference
+  - Purpose: Tek bir yerde marka/palet renklerini “not” gibi tutmak.
+  - Not: Bu dosya sadece referans. Tema token’larına bağlamadıkça UI’ı değiştirmez.
+
+  Tasarım sistemi HSL kullandığı için HSL değerlerini de ekledim.
+  (Bu değerler ekran görüntüsünden türetilmiş referans değerlerdir; birebir istersen HEX kodlarını yaz, aynen güncelleyeyim.)
+*/
+
+:root {
+  /* almanya101 */
+  --pal-almanya101-red-hex: #d10000;
+  --pal-almanya101-red: 0 100% 41%;
+
+  --pal-almanya101-yellow-hex: #ffc400;
+  --pal-almanya101-yellow: 46 100% 50%;
+
+  --pal-almanya101-white-hex: #ffffff;
+  --pal-almanya101-white: 0 0% 100%;
+
+  --pal-almanya101-black-hex: #000000;
+  --pal-almanya101-black: 0 0% 0%;
+
+  --pal-almanya101-purple-hex: #7a00ff;
+  --pal-almanya101-purple: 269 100% 50%;
+
+  /* UBT */
+  --pal-ubt-blue-hex: #00a8ff;
+  --pal-ubt-blue: 201 100% 50%;
+
+  --pal-ubt-green-hex: #79d600;
+  --pal-ubt-green: 86 100% 42%;
+
+  --pal-ubt-orange-hex: #ff5a00;
+  --pal-ubt-orange: 21 100% 50%;
+
+  --pal-ubt-purple-hex: #7a00ff;
+  --pal-ubt-purple: 269 100% 50%;
+
+  --pal-ubt-yellow-hex: #ffc400;
+  --pal-ubt-yellow: 46 100% 50%;
+
+  --pal-ubt-black-hex: #000000;
+  --pal-ubt-black: 0 0% 0%;
+
+  --pal-ubt-red-hex: #d10000;
+  --pal-ubt-red: 0 100% 41%;
+
+  --pal-ubt-white-hex: #ffffff;
+  --pal-ubt-white: 0 0% 100%;
+}

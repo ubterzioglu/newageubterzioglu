@@ -8,6 +8,8 @@ export type CodeRainOverlayProps = {
   layers?: 1 | 2 | 3;
   /** roughly how many columns on desktop */
   columns?: number;
+  /** if true, disables animation when OS setting prefers-reduced-motion is enabled */
+  respectReducedMotion?: boolean;
 };
 
 function usePrefersReducedMotion() {
@@ -51,8 +53,8 @@ function makeColumnString(seed: number) {
 }
 
 export const CodeRainOverlay = React.forwardRef<HTMLDivElement, CodeRainOverlayProps>(
-  ({ className, layers = 2, columns = 26 }, ref) => {
-    const reducedMotion = usePrefersReducedMotion();
+  ({ className, layers = 2, columns = 26, respectReducedMotion = true }, ref) => {
+    const reducedMotion = respectReducedMotion ? usePrefersReducedMotion() : false;
 
     const layerConfigs = React.useMemo(() => {
       const base = [
