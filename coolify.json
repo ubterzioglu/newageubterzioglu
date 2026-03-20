@@ -1,0 +1,43 @@
+{
+  "name": "newageubterzioglu",
+  "description": "Personal portfolio website with dark, cinematic design",
+  "repository": "https://github.com/ubterzioglu/newageubterzioglu",
+  "build": {
+    "command": "npm run build",
+    "outputDirectory": "dist",
+    "environment": {
+      "NODE_ENV": "production",
+      "VITE_SUPABASE_URL": "",
+      "VITE_SUPABASE_PUBLISHABLE_KEY": ""
+    }
+  },
+  "services": [
+    {
+      "name": "web",
+      "port": 5050,
+      "healthCheck": {
+        "path": "/",
+        "interval": 30
+      }
+    }
+  ],
+  "database": {
+    "type": "supabase",
+    "url": "",
+    "apiKey": ""
+  },
+  "env": [
+    {
+      "name": "VITE_SUPABASE_URL",
+      "description": "Supabase project URL",
+      "required": true,
+      "secret": true
+    },
+    {
+      "name": "VITE_SUPABASE_PUBLISHABLE_KEY",
+      "description": "Supabase public API key",
+      "required": true,
+      "secret": true
+    }
+  ]
+}
