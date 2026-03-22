@@ -1,0 +1,188 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- IMPORTANT: viewport-fit=cover helps iOS safe-area + dynamic bars -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Smellable — An app you can smell</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- === SEO BASICS === -->
+  <link rel="canonical" href="https://ubterzioglu.de/smellable/" />
+  <meta name="description"
+        content="Smellable is an experimental app that triggers memories through images. Look, imagine, and ask yourself: can you smell it?" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Smellable — An app you can smell" />
+  <meta property="og:description"
+        content="Close your eyes, imagine for 5 seconds, then decide: can you smell it?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ubterzioglu.de/smellable/" />
+  <meta property="og:image" content="https://ubterzioglu.de/smellable/og-smellable.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Smellable — An app you can smell" />
+  <meta name="twitter:description"
+        content="Images that trigger smell memories. Can you smell it?" />
+
+  <!-- === SCHEMA.ORG === -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Smellable",
+    "url": "https://ubterzioglu.de/smellable/",
+    "description": "An experimental web app that uses images to trigger smell memory.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+</head>
+
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <div class="logo">Smellable</div>
+      <button class="menu-btn" type="button" aria-label="Menu">•••</button>
+    </header>
+
+    <main class="main">
+      <section class="smell-card" aria-live="polite">
+        <div class="smell-media">
+          <img id="smell-image" alt="" />
+          <div class="smell-overlay"></div>
+        </div>
+
+        <div class="smell-content">
+          <div class="smell-info">
+            <h1 id="smell-name">—</h1>
+            <p id="smell-category" class="smell-category">—</p>
+          </div>
+
+          <div class="actions">
+            <div class="votes-block">
+              <p class="micro pre-smell-hint">
+                Close your eyes for 5 seconds.<br>
+                Imagine this image.<br>
+                Then answer.
+              </p>
+              <div class="votes-question">Can you smell it?</div>
+              <div class="votes">
+                <button class="vote-btn" id="vote-up" type="button" data-vote="up" aria-label="Yes">
+                  Yes! <span class="count" id="count-up">0</span>
+                </button>
+
+                <button class="vote-btn" id="vote-down" type="button" data-vote="down" aria-label="No">
+                  No! <span class="count" id="count-down">0</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="wa-btn" id="share-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Share via WhatsApp">
+              <img
+                src="img/whatsappshare.jpg"
+                alt="Share via WhatsApp"
+                class="wa-ico"
+                loading="lazy"
+              />
+            </a>
+          </div>
+
+          <!-- Suggest (default closed) -->
+          <details class="panel details" id="suggest-details">
+            <summary class="panel-summary">Suggest a smell</summary>
+
+            <div class="panel-inner">
+              <form
+                id="suggest-form"
+                class="suggest-form"
+                action="https://formsubmit.co/ubt@ubterzioglu.de"
+                method="POST"
+              >
+                <input type="hidden" name="_subject" value="Smellable: New suggestion" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
+                <input type="hidden" name="smell_id" id="suggest-smell-id" value="" />
+                <input type="hidden" name="smell_name" id="suggest-smell-name" value="" />
+                <input type="hidden" name="page_url" id="suggest-page-url" value="" />
+
+                <label class="field">
+                  <span>One sentence</span>
+                  <input
+                    id="suggest-text"
+                    name="suggestion"
+                    type="text"
+                    maxlength="160"
+                    placeholder="One-liner suggestion…"
+                    required
+                  />
+                </label>
+
+                <label class="field">
+                  <span>Image URL (optional)</span>
+                  <input
+                    id="suggest-image"
+                    name="image_url"
+                    type="url"
+                    placeholder="https://..."
+                  />
+                </label>
+
+                <button class="primary" type="submit">Send</button>
+
+                <p class="micro">
+                  Image upload yok. İstersen link ver.
+                </p>
+              </form>
+            </div>
+          </details>
+
+          <!-- Comments -->
+          <section class="panel">
+            <div class="panel-title">Comments</div>
+
+            <form id="comment-form" class="comment-form">
+              <input
+                id="comment-input"
+                type="text"
+                maxlength="160"
+                placeholder="Write an anonymous comment (max 160, no links)"
+                required
+              />
+              <button class="primary" type="submit">Post</button>
+            </form>
+
+            <div id="comments-meta" class="micro"></div>
+            <div id="comments-list" class="comments"></div>
+          </section>
+
+          <button class="next-btn" id="next-btn" type="button">
+            Next smell →
+          </button>
+
+          <p class="micro hintline">Tap / swipe / right arrow for next</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="hint">
+      <p>Did you smell it too?</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+
+  <!-- === GOATCOUNTER === -->
+  <script
+    data-goatcounter="https://ubterzioglude.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js">
+  </script>
+</body>
+</html>

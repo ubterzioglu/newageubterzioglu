@@ -1,0 +1,483 @@
+<!-- =========================================================
+  FILE: /zat/zat.html
+  PURPOSE:
+  - User uploads a photo
+  - Age estimation runs IN THE BROWSER (client-side)
+  - No photo is uploaded to the server
+  - ZAIS-like UI + SEO + GoatCounter
+========================================================= -->
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+    BASIC META
+  ========================================================== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZAT – AI Age Estimation</title>
+
+  <link rel="canonical" href="https://ubterzioglu.de/zat/zat.html" />
+  <meta name="description" content="Select a photo and see an AI-based age estimation directly in your browser. No data is uploaded to any server." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Shared stylesheet (optional) -->
+  <link rel="stylesheet" href="/ubt-shared.css" />
+
+  <!-- =========================================================
+    OPEN GRAPH / TWITTER
+  ========================================================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ZAT – AI Age Estimation" />
+  <meta property="og:description" content="Select a photo and see an AI-based age estimation directly in your browser. No data is uploaded." />
+  <meta property="og:url" content="https://ubterzioglu.de/zat/zat.html" />
+  <meta property="og:image" content="https://ubterzioglu.de/img/logoubt.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ZAT – AI Age Estimation" />
+  <meta name="twitter:description" content="Select a photo and see an AI-based age estimation directly in your browser. No data is uploaded." />
+  <meta name="twitter:image" content="https://ubterzioglu.de/img/logoubt.png" />
+
+  <!-- =========================================================
+    STRUCTURED DATA
+  ========================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://ubterzioglu.de/#person",
+    "name": "Umut Barış Terzioğlu",
+    "url": "https://ubterzioglu.de",
+    "image": "https://ubterzioglu.de/img/logoubt.png",
+    "jobTitle": "Senior Software Quality Assurance Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/umutbaristerzioglu"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://ubterzioglu.de/#website",
+    "name": "Umut Barış Terzioğlu",
+    "url": "https://ubterzioglu.de",
+    "description": "Personal website of Umut Barış Terzioğlu. Articles, tools, apps, and insights about software testing and technology."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://ubterzioglu.de/zat/zat.html#webpage",
+    "url": "https://ubterzioglu.de/zat/zat.html",
+    "name": "ZAT – AI Age Estimation",
+    "description": "Select a photo and see an AI-based age estimation directly in your browser. No data is uploaded.",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://ubterzioglu.de/#website",
+      "url": "https://ubterzioglu.de/",
+      "name": "Umut Barış Terzioğlu"
+    },
+    "about": {
+      "@type": "Person",
+      "@id": "https://ubterzioglu.de/#person",
+      "name": "Umut Barış Terzioğlu",
+      "url": "https://ubterzioglu.de/"
+    }
+  }
+  </script>
+
+  <!-- =========================================================
+    UI STYLES (ZAIS LOOK)
+  ========================================================== -->
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --text:#e9eefc;
+      --muted:#a9b4d6;
+      --line:rgba(255,255,255,.10);
+      --btn:#1d2a55;
+      --btn2:#233166;
+    }
+
+    *{box-sizing:border-box}
+
+    /* IMPORTANT: allow the page to scroll on desktop at 100% zoom */
+    html, body { height: auto; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(900px 600px at 20% 10%, rgba(97,124,255,.18), transparent 60%),
+                  radial-gradient(900px 600px at 80% 30%, rgba(73,209,125,.14), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+
+      min-height:100vh;
+      overflow-y:auto;
+
+      display:flex;
+      justify-content:center;
+      align-items:flex-start; /* was center -> caused bottom clipping */
+      padding:24px;
+      font-size: 16px;
+    }
+
+    .wrap{ width: min(1200px, 100%); }
+
+    .card{
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), transparent 18%), var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+      padding-bottom: 86px; /* widget safety space */
+    }
+
+    header{
+      padding:20px 22px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+
+    header h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+
+    header p{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height:1.35;
+      max-width:70ch;
+    }
+
+    .meta{
+      text-align:right;
+      min-width:190px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:10px;
+      white-space:nowrap;
+    }
+
+    .bar{
+      height:8px;
+      background: rgba(255,255,255,.08);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .bar > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(97,124,255,.9), rgba(73,209,125,.9));
+      border-radius:999px;
+      transition: width .25s ease;
+    }
+
+    main{padding:22px}
+
+    /* =====================================================
+       LAYOUT CHANGE: preview goes BELOW (single column)
+       ===================================================== */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr; /* single column */
+      gap:16px;
+      align-items:start;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .panel h2{
+      margin:0 0 10px 0;
+      font-size:14px;
+      color:var(--muted);
+      font-weight:650;
+      letter-spacing:.2px;
+    }
+
+    .fileRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+
+    input[type="file"]{
+      width: 100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .status{
+      margin-top:14px;
+      font-size: clamp(20px, 1.8vw, 26px);
+      line-height:1.35;
+      font-weight:700;
+    }
+
+    .hint{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height:1.45;
+    }
+
+    .hint.small{
+      margin:0;
+      margin-top:10px;
+    }
+
+    .sep{height:1px;background:var(--line); margin:22px 0}
+
+    .ai-cta{
+      margin-top: 18px;
+      padding-right: 120px;
+    }
+
+    .ai-cta p{
+      margin: 6px 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* =====================================================
+       STABLE PREVIEW (no layout jumping)
+       ===================================================== */
+    .panel.preview-panel{
+      min-height: 520px;
+      padding-bottom: 72px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #preview{
+      width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      display: none;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      background: rgba(0,0,0,.12);
+    }
+
+    .panel.preview-panel .hint.small{
+      margin-top: auto;
+    }
+
+    .corner-widget{
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .widget-avatar{
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+
+    .widget-avatar.logo{
+      background: rgba(255,255,255,.9);
+    }
+
+    @media (max-width:900px){
+      header{flex-direction:column; align-items:stretch}
+      .meta{text-align:left}
+    }
+
+    @media (max-width:700px){
+      .corner-widget{
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .widget-avatar{
+        width: 36px;
+        height: 36px;
+      }
+
+      .ai-cta{
+        padding-right: 0;
+        margin-bottom: 56px;
+      }
+
+      .panel.preview-panel{
+        min-height: 520px;
+        padding-bottom: 92px;
+      }
+
+      #preview{
+        max-height: 360px;
+      }
+
+      .card{
+        padding-bottom: 110px;
+      }
+    }
+  </style>
+
+  <!-- COUNTER GOAT -->
+  <script data-goatcounter="https://ubterzioglude.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
+  <!-- /COUNTER GOAT -->
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+          <h1>ZAT – AI Age Estimation</h1>
+          <p>
+            Your photo is never uploaded. Analysis is performed entirely in your browser.
+            (Client-side • No upload)
+          </p>
+        </div>
+
+        <div class="meta">
+          <div class="pill" id="counter">Status</div>
+          <div class="bar" aria-label="Progress">
+            <div id="progress"></div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div class="grid">
+          <!-- TOP: UPLOAD + RESULT -->
+          <div class="panel">
+            <h2>Select a photo</h2>
+
+            <div class="fileRow">
+              <input type="file" id="imageUpload" accept="image/*" />
+            </div>
+
+            <div id="result" class="status">Loading...</div>
+            <p id="hint" class="hint"></p>
+
+            <div class="sep"></div>
+
+            <div class="ai-cta">
+              <p>Feel free to like, comment, or share to help spread it.</p>
+              <p>Your feedback keeps this alive and pushes me to build more.</p>
+
+              <p>
+                Looking for more tools?
+                <a href="https://ubterzioglu.de/ztools.html" target="_blank" rel="noopener">
+                  Click!
+                </a>
+              </p>
+
+              <p>Thanks. <strong>UBT</strong>.</p>
+            </div>
+          </div>
+
+          <!-- BOTTOM: PREVIEW -->
+          <div class="panel preview-panel">
+            <h2>Preview</h2>
+
+            <img id="preview" alt="Photo preview" />
+
+            <p class="hint small">
+              Tip: Front-facing, sharp, and well-lit photos give better results.
+            </p>
+          </div>
+        </div>
+
+        <!-- Corner Widget (bottom-right) -->
+        <div class="corner-widget">
+          <a href="../index.html" aria-label="Go to Home">
+            <img src="/img/logoubt.png" alt="UBT Profile" class="widget-avatar" />
+          </a>
+
+          <a href="../index.html" aria-label="Go to Home">
+            <img src="/img/picprofile.png" alt="UBT Logo" class="widget-avatar logo" />
+          </a>
+        </div>
+        <!-- /Corner Widget -->
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================
+    face-api.js (Browser UMD build via jsDelivr)
+  ========================================================== -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <!-- ZAT Age Tool JS -->
+  <script defer src="./js/age-tool.js"></script>
+
+  <!-- =========================================================
+    OPTIONAL UI SYNC (updates pill + bar from #result text)
+  ========================================================== -->
+  <script>
+    const counterEl = document.getElementById("counter");
+    const barEl = document.getElementById("progress");
+    const resultEl = document.getElementById("result");
+
+    function setUI(label, pct){
+      counterEl.textContent = label;
+      barEl.style.width = (pct || 0) + "%";
+    }
+
+    setUI("Loading…", 15);
+
+    const obs = new MutationObserver(() => {
+      const t = (resultEl.textContent || "").toLowerCase();
+
+      if (t.includes("loading")) setUI("Loading…", 25);
+      else if (t.includes("ready")) setUI("Ready", 55);
+      else if (t.includes("analy")) setUI("Analyzing…", 80);
+      else if (t.includes("estimated age")) setUI("Done", 100);
+      else if (t.includes("error") || t.includes("not detected")) setUI("Error", 35);
+    });
+
+    obs.observe(resultEl, { childList:true, characterData:true, subtree:true });
+  </script>
+</body>
+</html>
+<!-- =========================================================
+  END OF FILE: /zat/zat.html
+========================================================= -->

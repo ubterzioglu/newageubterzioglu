@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+readme.md
+CLAUDE.md
+.env
+.env.local
+.vscode
+.idea
+*.md
+server.bat
+server.py
+start_server.py
+.dockerignore
+docker-compose.yml

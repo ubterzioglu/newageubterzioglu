@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Germany Travel Guide - Discover Beautiful Cities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">🇩🇪 Germany Travel Guide</h1>
+                <p class="tagline">Discover the beauty, history, and culture of German cities</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="hero-title">Explore Germany's Major Cities</h2>
+            <p class="hero-subtitle">From historic landmarks to modern attractions, discover what makes each city unique</p>
+        </div>
+    </section>
+
+    <!-- Cities Grid -->
+    <main class="main">
+        <div class="container">
+            <div class="cities-grid" id="citiesGrid">
+                <!-- Cities will be dynamically loaded here from cities-data.js -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Germany Travel Guide. Your comprehensive guide to German cities.</p>
+        </div>
+    </footer>
+
+    <script src="cities-data.js"></script>
+    <script>
+        // Load cities dynamically
+        function loadCities() {
+            const grid = document.getElementById('citiesGrid');
+            const colors = ['#D83B01', '#FF8C00', '#FFB900', '#107C10', '#00B7C3', '#0078D4', '#7719AA'];
+            
+            citiesData.forEach((city, index) => {
+                const color = colors[index % colors.length];
+                const card = document.createElement('div');
+                card.className = 'city-card';
+                card.style.setProperty('--card-color', color);
+                card.onclick = () => window.location.href = `city.html?id=${city.id}`;
+                
+                card.innerHTML = `
+                    <div class="city-card-image" style="background-image: url('${city.image}');">
+                        <div class="city-card-overlay"></div>
+                    </div>
+                    <div class="city-card-content">
+                        <h3 class="city-card-title">${city.name}</h3>
+                        <p class="city-card-region">${city.region}</p>
+                        <p class="city-card-population">Population: ${city.population}</p>
+                        <p class="city-card-description">${city.shortDescription}</p>
+                        <button class="city-card-button">Explore ${city.name}</button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Load cities on page load
+        document.addEventListener('DOMContentLoaded', loadCities);
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Don't Know – Umut Barış Terzioğlu</title>
+  <meta name="description" content="A small sandbox page by Umut Barış Terzioğlu for quick experiments, notes, and links that are still evolving." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://ubterzioglu.de/zdontknow.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Don't Know – Umut Barış Terzioğlu" />
+  <meta property="og:description" content="A small sandbox page for quick experiments, notes, and links that are still evolving." />
+  <meta property="og:url" content="https://ubterzioglu.de/zdontknow.html" />
+  <meta property="og:image" content="https://ubterzioglu.de/img/logoubt.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Don't Know – Umut Barış Terzioğlu" />
+  <meta name="twitter:description" content="A small sandbox page for quick experiments, notes, and links that are still evolving." />
+  <meta name="twitter:image" content="https://ubterzioglu.de/img/logoubt.png" />
+
+  <meta name="author" content="Umut Barış Terzioğlu" />
+
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="ubt-shared.css" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://ubterzioglu.de/#person",
+        "name": "Umut Barış Terzioğlu",
+        "url": "https://ubterzioglu.de",
+        "image": "https://ubterzioglu.de/img/logoubt.png",
+        "jobTitle": "Senior Software Quality Assurance Engineer",
+        "sameAs": [
+          "https://www.linkedin.com/in/umutbaristerzioglu"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ubterzioglu.de/#website",
+        "url": "https://ubterzioglu.de",
+        "name": "ubterzioglu.de",
+        "publisher": { "@id": "https://ubterzioglu.de/#person" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://ubterzioglu.de/zdontknow.html#webpage",
+        "url": "https://ubterzioglu.de/zdontknow.html",
+        "name": "Don't Know",
+        "description": "A small sandbox page for quick experiments, notes, and links that are still evolving.",
+        "isPartOf": { "@id": "https://ubterzioglu.de/#website" },
+        "about": { "@id": "https://ubterzioglu.de/#person" },
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a id="top"></a>
+
+  <div class="container">
+
+    <!-- HERO (always first) -->
+    <div id="hero-root"></div>
+    <!-- END of block: HERO ROOT -->
+
+    <!-- NAVIGATION (MANUAL: you control this) -->
+    <div class="card nav-card">
+
+      <div class="card-buttons">
+        <a href="index.html"><img src="/img/z0cliphome.png" class="btn-icon" alt="Home" /></a>
+        <a href="#top"><img src="/img/z0clipup.png" class="btn-icon" alt="Up" /></a>
+      </div>
+
+      <h2 class="section-title">Navigation</h2>
+
+      <div class="nav-grid">
+
+        <!-- IDs must match the cards below -->
+       <div class="nav-item" onclick="location.href='ztools.html'">
+          <span><span class="nav-icon">🧰</span> Tools Developed by UBT (me) </span>
+          <span class="chevron">›</span>
+        </div>    
+     
+     
+        <div class="nav-item" onclick="document.getElementById('cv')?.scrollIntoView();">
+          <span><span class="nav-icon">📄</span> My CV</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('aboutme')?.scrollIntoView();">
+          <span><span class="nav-icon">🙋‍♂️</span> About me</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('achievements')?.scrollIntoView();">
+          <span><span class="nav-icon">🏆</span> Key Achievements</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('tech')?.scrollIntoView();">
+          <span><span class="nav-icon">🧰</span> Tech Stack</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('experience')?.scrollIntoView();">
+          <span><span class="nav-icon">💼</span> Experience</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('projects-corporate')?.scrollIntoView();">
+          <span><span class="nav-icon">🚀</span> Corporate Projects</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="document.getElementById('projects-private')?.scrollIntoView();">
+          <span><span class="nav-icon">🌟</span> Private Projects</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="location.href='zarticles.html'">
+          <span><span class="nav-icon">📝</span> Articles</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="location.href='zbom/zbom.html'">
+          <span><span class="nav-icon">🔖</span> My Bookmarks</span>
+          <span class="chevron">›</span>
+        </div>
+
+        <div class="nav-item" onclick="location.href='zapps.html'">
+          <span><span class="nav-icon">🗂️</span> Useful Apps</span>
+          <span class="chevron">›</span>
+        </div>
+
+             <div class="nav-item" onclick="document.getElementById('contact')?.scrollIntoView();">
+          <span><span class="nav-icon">☎️</span> Contact</span>
+          <span class="chevron">›</span>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- END of block: NAVIGATION (MANUAL) -->
+
+    <!-- AUTO CARDS ROOT (rendered by card-loader.js) -->
+    <div id="cards-root"></div>
+    <!-- END of block: CARDS ROOT -->
+
+    <!-- FOOTER -->
+    <div style="
+      text-align:center;
+      margin:24px 0 16px 0;
+      color:#ffffff;
+      font-size:12px;
+      letter-spacing:.6px;
+    ">
+      © ubterzioglu · 2025 <a href="https://www.spindorai.com" rel="dofollow">Seo Aracı</a> ve Seo Hizmetleri Spindora
+    </div>
+    <!-- END: FOOTER -->
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="card-loader.js"></script>
+  <script>
+    // 1) HERO always on top
+    cardLoader.renderInto("hero-root", ["heroDontknow"]);
+
+    // 2) Cards below navigation
+    cardLoader.renderInto("cards-root", [
+      "cv",
+      "aboutme",
+      "achievements",
+      "techStack",
+      "experience",
+      "corporateProjects",
+      "privateProjects",
+      "contact"
+    ]);
+  </script>
+  <!-- END of block: PAGE SCRIPTS -->
+
+  <script src="/goat.js"></script>
+</body>
+</html>
