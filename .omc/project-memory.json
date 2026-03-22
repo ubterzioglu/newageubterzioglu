@@ -186,6 +186,12 @@
       "type": "directory"
     },
     {
+      "path": "src\\lib\\supabase.ts",
+      "accessCount": 4,
+      "lastAccessed": 1774166292511,
+      "type": "file"
+    },
+    {
       "path": "src\\App.tsx",
       "accessCount": 3,
       "lastAccessed": 1774164571708,
@@ -246,12 +252,6 @@
       "type": "file"
     },
     {
-      "path": "src\\lib\\supabase.ts",
-      "accessCount": 2,
-      "lastAccessed": 1774165261408,
-      "type": "file"
-    },
-    {
       "path": "supabase\\config.toml",
       "accessCount": 2,
       "lastAccessed": 1774165413815,
@@ -261,6 +261,12 @@
       "path": "supabase\\.temp\\project-ref",
       "accessCount": 2,
       "lastAccessed": 1774165414405,
+      "type": "file"
+    },
+    {
+      "path": "supabase\\migrations\\20260215220959_782b05e1-a91a-4ebf-8b3c-2f5d18d8a670.sql",
+      "accessCount": 2,
+      "lastAccessed": 1774166299292,
       "type": "file"
     },
     {
@@ -291,12 +297,6 @@
       "path": "src\\pages\\Index.tsx",
       "accessCount": 1,
       "lastAccessed": 1774164308147,
-      "type": "file"
-    },
-    {
-      "path": "supabase\\migrations\\20260215220959_782b05e1-a91a-4ebf-8b3c-2f5d18d8a670.sql",
-      "accessCount": 1,
-      "lastAccessed": 1774164350070,
       "type": "file"
     },
     {

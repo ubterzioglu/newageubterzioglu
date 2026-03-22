@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"psql \\\"postgresql://postgres:PPPlll!11321132@db.pkbmcfpcvjmvjzqzixyc.supabase.co:5432/postgres\\\" -c \\\"SELECT id, email FROM auth.users LIMIT 10;\\\" 2>&1\",\"description\":\"List existing auth u...",
-  "error": "Exit code 127\n/usr/bin/bash: line 1: psql: command not found",
-  "timestamp": "2026-03-22T07:36:48.768Z",
+  "tool_input_preview": "{\"command\":\"ls \\\"C:\\\\.temp_private\\\\ubterziogludenew\\\" && echo \\\"---\\\" && ls \\\"C:\\\\.temp_private\\\\ubterziogludenew\\\\src\\\\integrations\\\\supabase\\\\\\\"\",\"description\":\"List project root and integrations f...",
+  "error": "Exit code 2\n/usr/bin/bash: eval: line 1: unexpected EOF while looking for matching `\"'",
+  "timestamp": "2026-03-22T07:51:42.329Z",
   "retry_count": 1
 }

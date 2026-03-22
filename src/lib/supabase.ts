@@ -1,11 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
+const SUPABASE_URL = "https://pkbmcfpcvjmvjzqzixyc.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrYm1jZnBjdmptdmp6cXppeHljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0OTQyMDgsImV4cCI6MjA4NjA3MDIwOH0.v94fKJeqH3rHhR1Pld_ABD7F8aGWiCtKr-acRGZ3GKI";
 
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  // Fail fast in dev so it's obvious what's missing.
-  console.warn("Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY env vars");
-}
-
-export const supabase = createClient(SUPABASE_URL ?? "", SUPABASE_ANON_KEY ?? "");
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
