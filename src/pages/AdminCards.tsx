@@ -10,6 +10,7 @@ import { PERSONAS, type ContentCard, type Persona } from "@/lib/cards-schema";
 import { fetchCards, replaceCardActions, upsertCard } from "@/lib/cards-api";
 import { signOut } from "@/lib/auth-api";
 import { SYSTEM_CARDS, isSystemCardId } from "@/lib/system-cards";
+import { toast } from "sonner";
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDropzone } from "react-dropzone";
@@ -82,12 +83,16 @@ export default function AdminCardsPage() {
 
   async function onSave() {
     if (isSystemCardId(selectedId)) return;
-    // upsert card, then replace actions
-    const id = await upsertCard({ ...draft, persona });
-    await replaceCardActions(id, draft.actions ?? []);
-
-    setSelectedId(id);
-    await qc.invalidateQueries({ queryKey: ["cards", persona] });
+    try {
+      const id = await upsertCard({ ...draft, persona });
+      await replaceCardActions(id, draft.actions ?? []);
+      setSelectedId(id);
+      await qc.invalidateQueries({ queryKey: ["cards", persona] });
+      toast.success("Card saved.");
+    } catch (err) {
+      console.error(err);
+      toast.error(`Save failed: ${err instanceof Error ? err.message : String(err)}`);
+    }
   }
 
   async function onDelete() {
@@ -95,11 +100,16 @@ export default function AdminCardsPage() {
     if (!selected?.id) return;
     if (!confirm("Delete this card?")) return;
 
-    const { error: delErr } = await supabase.from("content_cards").delete().eq("id", selected.id);
-    if (delErr) throw delErr;
-
-    setSelectedId(null);
-    await qc.invalidateQueries({ queryKey: ["cards", persona] });
+    try {
+      const { error: delErr } = await supabase.from("content_cards").delete().eq("id", selected.id);
+      if (delErr) throw delErr;
+      setSelectedId(null);
+      await qc.invalidateQueries({ queryKey: ["cards", persona] });
+      toast.success("Card deleted.");
+    } catch (err) {
+      console.error(err);
+      toast.error(`Delete failed: ${err instanceof Error ? err.message : String(err)}`);
+    }
   }
 
   return (
