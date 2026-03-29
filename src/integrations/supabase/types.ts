@@ -55,8 +55,10 @@ export type Database = {
           description: string
           id: string
           image_path: string | null
+          placement_key: string
           persona: string
           sort_order: number
+          source_template_key: string | null
           title: string
           updated_at: string
         }
@@ -65,8 +67,10 @@ export type Database = {
           description: string
           id?: string
           image_path?: string | null
+          placement_key?: string
           persona: string
           sort_order?: number
+          source_template_key?: string | null
           title: string
           updated_at?: string
         }
@@ -75,8 +79,10 @@ export type Database = {
           description?: string
           id?: string
           image_path?: string | null
+          placement_key?: string
           persona?: string
           sort_order?: number
+          source_template_key?: string | null
           title?: string
           updated_at?: string
         }

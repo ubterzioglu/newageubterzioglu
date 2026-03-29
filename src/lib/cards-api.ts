@@ -1,9 +1,11 @@
 import { supabase } from "@/lib/supabase";
-import type { ContentCard, ContentCardAction, Persona } from "@/lib/cards-schema";
+import type { CardPlacementKey, ContentCard, ContentCardAction, Persona } from "@/lib/cards-schema";
 
 export type DbCard = {
   id: string;
   persona: string;
+  placement_key: string;
+  source_template_key: string | null;
   title: string;
   description: string;
   sort_order: number;
@@ -21,17 +23,27 @@ export type DbAction = {
   created_at: string;
 };
 
-export async function fetchCards(persona: Persona): Promise<ContentCard[]> {
-  const { data: cards, error } = await supabase
+export async function fetchCards({
+  persona,
+  placementKey,
+}: {
+  persona: Persona;
+  placementKey?: CardPlacementKey;
+}): Promise<ContentCard[]> {
+  let query = supabase
     .from("content_cards")
-    .select("id, persona, title, description, sort_order, image_path")
-    .eq("persona", persona)
-    .order("sort_order", { ascending: true })
-    .order("created_at", { ascending: true });
+    .select("id, persona, placement_key, source_template_key, title, description, sort_order, image_path")
+    .eq("persona", persona);
+
+  if (placementKey) {
+    query = query.eq("placement_key", placementKey);
+  }
+
+  const { data: cards, error } = await query.order("sort_order", { ascending: true }).order("created_at", { ascending: true });
 
   if (error) throw error;
 
-  const cardIds = (cards ?? []).map((c) => c.id);
+  const cardIds = (cards ?? []).map((card) => card.id);
 
   const { data: actions, error: actionsError } = cardIds.length
     ? await supabase
@@ -45,20 +57,22 @@ export async function fetchCards(persona: Persona): Promise<ContentCard[]> {
   if (actionsError) throw actionsError;
 
   const byCard = new Map<string, ContentCardAction[]>();
-  for (const a of actions ?? []) {
-    const arr = byCard.get(a.card_id) ?? [];
-    arr.push({ id: a.id, label: a.label, href: a.href, sort_order: a.sort_order });
-    byCard.set(a.card_id, arr);
+  for (const action of actions ?? []) {
+    const items = byCard.get(action.card_id) ?? [];
+    items.push({ id: action.id, label: action.label, href: action.href, sort_order: action.sort_order });
+    byCard.set(action.card_id, items);
   }
 
-  return (cards ?? []).map((c) => ({
-    id: c.id,
-    persona: c.persona as Persona,
-    title: c.title,
-    description: c.description,
-    sort_order: c.sort_order,
-    image_path: c.image_path,
-    actions: byCard.get(c.id) ?? [],
+  return (cards ?? []).map((card) => ({
+    id: card.id,
+    persona: card.persona as Persona,
+    placement_key: card.placement_key as CardPlacementKey,
+    source_template_key: card.source_template_key,
+    title: card.title,
+    description: card.description,
+    sort_order: card.sort_order,
+    image_path: card.image_path,
+    actions: byCard.get(card.id) ?? [],
   }));
 }
 
@@ -69,6 +83,8 @@ export async function upsertCard(card: ContentCard): Promise<string> {
       {
         id: card.id,
         persona: card.persona,
+        placement_key: card.placement_key,
+        source_template_key: card.source_template_key ?? null,
         title: card.title,
         description: card.description,
         sort_order: card.sort_order,
@@ -84,20 +100,19 @@ export async function upsertCard(card: ContentCard): Promise<string> {
 }
 
 export async function replaceCardActions(cardId: string, actions: ContentCardAction[]) {
-  // naive but simple: delete then insert
-  const { error: delError } = await supabase.from("content_card_actions").delete().eq("card_id", cardId);
-  if (delError) throw delError;
+  const { error: deleteError } = await supabase.from("content_card_actions").delete().eq("card_id", cardId);
+  if (deleteError) throw deleteError;
 
   if (!actions.length) return;
 
-  const { error: insError } = await supabase.from("content_card_actions").insert(
-    actions.map((a, idx) => ({
+  const { error: insertError } = await supabase.from("content_card_actions").insert(
+    actions.map((action, index) => ({
       card_id: cardId,
-      label: a.label,
-      href: a.href,
-      sort_order: a.sort_order ?? idx,
+      label: action.label,
+      href: action.href,
+      sort_order: action.sort_order ?? index,
     })),
   );
 
-  if (insError) throw insError;
+  if (insertError) throw insertError;
 }
